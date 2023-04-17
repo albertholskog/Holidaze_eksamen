@@ -13,8 +13,11 @@ function App() {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="venue" element={<VenueList />} />
-          <Route path="venue/:Id" element={<VenueSpecific />} />
+          <Route>
+            <Route path="/venues" />
+            <Route index element={<VenueList />} />
+            <Route path=":id" element={<VenueSpecific />} />
+          </Route>
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
