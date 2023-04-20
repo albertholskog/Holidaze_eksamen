@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { Container } from "@mui/material";
 
 function SharedLayout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <Container maxWidth={"lg"}>
+        <Outlet />
+      </Container>
     </>
   );
 }

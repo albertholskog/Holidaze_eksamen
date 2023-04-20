@@ -1,21 +1,31 @@
 import { createTheme } from "@mui/material";
-import { orange } from "@mui/material/colors";
 
 export const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: orange[500],
+      main: "#B1411D",
+    },
+    secondary: {
+      main: "#131415",
     },
   },
   typography: {
     fontFamily: "Cantarell",
+
     h1: {
       fontWeight: 600,
-      fontSize:20
+      fontSize: 20,
+    },
+    h2: {
+      fontWeight: 500,
+      fontSize: 24,
     },
     p: {
       fontFamily: "Open Sans",
+    },
+    a: {
+      color: "secondary.main",
     },
   },
 });
