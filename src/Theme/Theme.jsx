@@ -1,31 +1,32 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 
-export const theme = createTheme({
+const color = {
+  primary: "#B1411D",
+  black: "#131415",
+};
+
+export const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#B1411D",
+      main: color.primary,
     },
-    secondary: {
-      main: "#131415",
+    black: {
+      main: color.black,
+    },
+    background: {
+      default: "#F7F7F7",
     },
   },
   typography: {
-    fontFamily: "Cantarell",
-
-    h1: {
-      fontWeight: 600,
-      fontSize: 20,
-    },
+    fontFamily: "Open Sans",
+    
+    color: color.black,
     h2: {
+      fontFamily: "Cantarell",
       fontWeight: 500,
-      fontSize: 24,
-    },
-    p: {
-      fontFamily: "Open Sans",
-    },
-    a: {
-      color: "secondary.main",
+      fontSize: 34,
+      color: color.black,
     },
   },
 });

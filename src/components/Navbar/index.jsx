@@ -1,37 +1,27 @@
-import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Logo from "../../svg/Logo";
+import NavbarLink from "../NavbarLink";
+import NavbarModal from "../NavbarModal";
 import {
   AppBar,
-  Box,
+  Container,
   Toolbar,
   Typography,
-  Modal,
+  Box,
   useMediaQuery,
-  Container,
-  
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import PersonIcon from "@mui/icons-material/Person";
+import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import PersonIcon from "@mui/icons-material/Person";
 
 function Navbar() {
-  const isLogin = false;
-  const [open, setOpen] = useState(false);
+  const isLogin = true;
   const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
+  console.log(matches);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (matches) {
@@ -39,279 +29,81 @@ function Navbar() {
     }
   }, [matches]);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleOpen = () => setModalOpen(true);
-  const handleClose = () => setModalOpen(false);
-
-  const menuRef = useRef(null);
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [menuRef]);
-
+  const styleDropdown = {
+    position: "fixed",
+    top: 85,
+    right: 0,
+    width: "50vw",
+    maxWidth: "300px",
+    height: "100vh",
+    bgcolor: "primary.main",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignContent: "center",
+    flexWrap: "wrap",
+    zIndex: 1,
+    rowGap: 5,
+  };
   return (
     <AppBar position="static" elevation={0} color="transparent">
-      <Container maxWidth={"lg"}>
+      <Container maxWidth={"lg"} sx={{mt:3}}>
         <Toolbar
           disableGutters
           sx={{
             display: "flex",
             alignContent: "center",
             justifyContent: "space-between",
-            minHeight: 85,
-            pt: 2,
           }}
         >
-          <Typography variant="h1" aria-label="Holidaze logo">
+          <Typography
+           
+            variant="h1"
+            aria-label="Holidaze logo"
+          >
             <Logo />
           </Typography>
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              columnGap: "3rem",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Link
-                to="/venues"
-                style={{
-                  textDecoration: "none",
-                  color: "#131415",
-                  marginRight: "20px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignContent: "center",
-                }}
-              >
-                <SearchIcon sx={{ color: "secondary.main", fontSize: 30 }} />
-                <Typography variant="h2">Venues</Typography>
-              </Link>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Link
-                to="/"
-                style={{
-                  textDecoration: "none",
-                  color: "#131415",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignContent: "center",
-                }}
-              >
-                <HomeIcon sx={{ color: "secondary.main", fontSize: 30 }} />
-                <Typography variant="h2">Home</Typography>
-              </Link>
-            </Box>
-
-            {isLogin ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Link
-                  to={"/profile"}
-                  style={{
-                    textDecoration: "none",
-                    color: "#131415",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignContent: "center",
-                  }}
-                >
-                  <PersonIcon sx={{ color: "secondary.main", fontSize: 30 }} />
-                  <Typography variant="h2">Profile</Typography>
-                </Link>
-              </Box>
-            ) : (
-              <Box>
-                <Box
-                  onClick={handleOpen}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <PersonIcon sx={{ color: "secondary.main", fontSize: 30 }} />
-                  <Typography variant="h2">Profile</Typography>
-                </Box>
-                <Modal
-                  open={modalOpen}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                    >
-                      Text in a modal
-                    </Typography>
-                    <Typography
-                      id="modal-modal-description"
-                      sx={{ mt: 2 }}
-                    ></Typography>
-                  </Box>
-                </Modal>
-              </Box>
-            )}
-          </Box>
-
-          {!open ? (
-            <MenuIcon
-              sx={{ display: { sm: "block", md: "none", fontSize: 40 } }}
-              onClick={() => setOpen(!open)}
-            />
+          {matches ? (
+            ""
           ) : (
-            <CloseIcon
-              sx={{ zIndex: 2, fontSize: 40 }}
-              onClick={() => setOpen(!open)}
-            />
+            <Box onClick={() => setOpen(!open)}>
+              {!open ? <MenuIcon /> : <CloseIcon />}
+            </Box>
           )}
-
           <Box
-            ref={menuRef}
-            sx={{
-              transform: open ? "translateX(0)" : "translateX(50vw)",
-              transition: "transform 0.2s ease-in-out",
-              position: "fixed",
-              top: 85,
-              right: 0,
-              width: "50vw",
-              maxWidth: "300px",
-              height: "100vh",
-              bgcolor: "primary.main",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              zIndex: 1,
-            }}
+            sx={
+              open
+                ? styleDropdown
+                : { display: { xs: "none", sm: "none", md: "flex" } }
+            }
           >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Link
-                to="/venues"
-                style={{
-                  textDecoration: "none",
-                  color: "#131415",
-                  marginRight: "20px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignContent: "center",
-                }}
-              >
-                <SearchIcon sx={{ color: "secondary.main", fontSize: 30 }} />
-                <Typography variant="h2">Venues</Typography>
-              </Link>
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Link
-                to="/"
-                style={{
-                  textDecoration: "none",
-                  color: "#131415",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignContent: "center",
-                }}
-              >
-                <HomeIcon sx={{ color: "secondary.main", fontSize: 30 }} />
-                <Typography variant="h2">Home</Typography>
-              </Link>
-            </Box>
+            <NavbarLink
+              text={"Home"}
+              link={"/"}
+              icon={<HomeIcon sx={{ color: "black.main", fontSize: 30 }} />}
+            />
+            <NavbarLink
+              text={"Venues"}
+              link={"/venues"}
+              icon={
+                <SearchIcon sx={{ color: "black.main", fontSize: 30 }} />
+              }
+            />
             {isLogin ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Link
-                  to={"/profile"}
-                  style={{
-                    textDecoration: "none",
-                    color: "#131415",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignContent: "center",
-                  }}
-                >
-                  <PersonIcon sx={{ color: "secondary.main", fontSize: 30 }} />
-                  <Typography variant="h2">Profile</Typography>
-                </Link>
-              </Box>
+              <NavbarLink
+                text={"Profile"}
+                link={"/profile"}
+                icon={
+                  <PersonIcon sx={{ color: "black.main", fontSize: 30 }} />
+                }
+              />
             ) : (
-              <Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onClick={handleOpen}
-                >
-                  <PersonIcon sx={{ color: "secondary.main", fontSize: 30 }} />
-                  <Typography variant="h2">Profile</Typography>
-                </Box>
-                <Modal
-                  open={modalOpen}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                    >
-                      Text in a modal
-                    </Typography>
-                    <Typography
-                      id="modal-modal-description"
-                      sx={{ mt: 2 }}
-                    ></Typography>
-                  </Box>
-                </Modal>
-              </Box>
+              <NavbarModal
+                text={"Profile"}
+                icon={
+                  <PersonIcon sx={{ color: "black.main", fontSize: 30 }} />
+                }
+              />
             )}
           </Box>
         </Toolbar>
