@@ -17,17 +17,20 @@ import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 
-function Navbar() {
-  const isLogin = true;
-  const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
-  console.log(matches);
-  const [open, setOpen] = useState(false);
+import { useAuth } from "../../utils/auth";
 
+function Navbar() {
+  const [open, setOpen] = useState(false);
+  const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
+  const auth = useAuth()
+  
   useEffect(() => {
     if (matches) {
       setOpen(false);
     }
   }, [matches]);
+  
+  // const isLogin = false;
 
   const styleDropdown = {
     position: "fixed",
@@ -89,7 +92,7 @@ function Navbar() {
                 <SearchIcon sx={{ color: "black.main", fontSize: 30 }} />
               }
             />
-            {isLogin ? (
+            {auth.user ? (
               <NavbarLink
                 text={"Profile"}
                 link={"/profile"}

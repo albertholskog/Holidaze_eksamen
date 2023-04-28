@@ -1,10 +1,15 @@
 import { useState } from "react";
+import RegisterForm from "../../components/Form/RegisterForm"
+import LoginForm from "../../components/Form/LoginForm";
 import { Box, Typography, Modal } from "@mui/material";
 
 function NavbarModal({ icon, text }) {
+  const [modal, setModal] = useState(true);
+
   const [modalOpen, setModalOpen] = useState(false);
   const handleOpen = () => setModalOpen(true);
   const handleClose = () => setModalOpen(false);
+
   return (
     <Box>
       <Box
@@ -17,7 +22,7 @@ function NavbarModal({ icon, text }) {
         }}
       >
         {icon}
-        <Typography variant="h2" sx={{ml:1}}>
+        <Typography variant="h2" sx={{ ml: 1 }}>
           {text}
         </Typography>
       </Box>
@@ -35,15 +40,32 @@ function NavbarModal({ icon, text }) {
             transform: "translate(-50%, -50%)",
             width: 400,
             bgcolor: "background.paper",
-            border: "2px solid #000",
-            boxShadow: 24,
+            borderRadius: 2,
             p: 4,
+            display: "flex",
+            flexDirection: "column",
+
+            gap: 5,
           }}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ textAlign: "center" }}
+          >
+            {modal ? "Login" : "Sign up"}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
+          {modal ? <LoginForm /> : <RegisterForm />}
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h4"
+            sx={{ textDecoration: "underline", textAlign: "end" }}
+            onClick={() => setModal(!modal)}
+          >
+            {modal ? "Click her if u don't have a user" : "Click her to login"}
+          </Typography>
         </Box>
       </Modal>
     </Box>

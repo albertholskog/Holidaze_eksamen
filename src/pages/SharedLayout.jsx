@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Container } from "@mui/material";
-import Navbar from "../components/Navbar";
+import Navbar from "../Header/Navbar";
 function SharedLayout() {
   return (
     <>
