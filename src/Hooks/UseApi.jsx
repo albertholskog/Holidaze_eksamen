@@ -1,24 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function UseApi() {
+function useApi(url) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [catchError, setCatchError] = useState(false);
-  const [responseError, setResponseError] = useState(true);
+  const [responseError, setResponseError] = useState(false)
 
-  
+  useEffect(() => {
     setIsLoading(true);
-    async function fetchData(url, method, verification, form) {
+    async function fetchData() {
       try {
-        const response = await fetch(url, {
-          method: method,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${verification}`,
-          },
-          body: JSON.stringify(form),
-        });
-        setResponseError(!response.ok);
+        const response = await fetch(url);
+        setResponseError(response.ok)
         const json = await response.json();
         setData(json);
         setIsLoading(false);
@@ -29,9 +22,9 @@ function UseApi() {
       }
     }
     fetchData();
-  
+  }, [url]);
 
   return { data, isLoading, catchError, responseError };
 }
 
-export default UseApi;
+export default useApi;

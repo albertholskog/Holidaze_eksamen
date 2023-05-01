@@ -28,5 +28,17 @@ export const lightTheme = createTheme({
       fontSize: 34,
       color: color.black,
     },
+    h3: {
+      fontFamily: "Cantarell",
+      fontWeight: 600,
+      fontSize: 24,
+      color: color.black,
+    },
+    h4: {
+      fontFamily: "Cantarell",
+      fontWeight: 500,
+      fontSize: 24,
+      color: color.black,
+    },
   },
 });

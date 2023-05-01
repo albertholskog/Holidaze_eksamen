@@ -1,7 +1,14 @@
-import { Box } from "@mui/material";
+import Hero from "../components/Hero";
 
+import MyCarousel from "../components/Carousel/CarouselBody";
 function Home() {
-  return <Box><p>home</p></Box>;
+ 
+  return (
+    <>
+      <Hero />
+      {/* <MyCarousel /> */}
+    </>
+  );
 }
 
 export default Home;

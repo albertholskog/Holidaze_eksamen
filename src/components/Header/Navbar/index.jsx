@@ -10,33 +10,31 @@ import {
   Box,
   useMediaQuery,
 } from "@mui/material";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
-
-import { useAuth } from "../../utils/auth";
+import { useAuth } from "../../../utils/auth";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
-  const auth = useAuth()
-  
+  const auth = useAuth();
+
   useEffect(() => {
     if (matches) {
       setOpen(false);
     }
   }, [matches]);
+
   
-  // const isLogin = false;
 
   const styleDropdown = {
     position: "fixed",
-    top: 85,
+    top: 0,
     right: 0,
-    width: "50vw",
+    width: "100%",
     maxWidth: "300px",
     height: "100vh",
     bgcolor: "primary.main",
@@ -46,11 +44,11 @@ function Navbar() {
     alignContent: "center",
     flexWrap: "wrap",
     zIndex: 1,
-    rowGap: 5,
+    gap:5
   };
   return (
     <AppBar position="static" elevation={0} color="transparent">
-      <Container maxWidth={"lg"} sx={{mt:3}}>
+      <Container maxWidth={"lg"}>
         <Toolbar
           disableGutters
           sx={{
@@ -59,28 +57,31 @@ function Navbar() {
             justifyContent: "space-between",
           }}
         >
-          <Typography
-           
-            variant="h1"
-            aria-label="Holidaze logo"
-          >
+          <Typography variant="h1" aria-label="Holidaze logo">
             <Logo />
           </Typography>
           {matches ? (
             ""
           ) : (
-            <Box onClick={() => setOpen(!open)}>
-              {!open ? <MenuIcon /> : <CloseIcon />}
+            <Box
+              sx={{ zIndex: 2, pt:2 }}
+              onClick={() => setOpen(!open)}
+            >
+              {!open ? (
+                <MenuIcon sx={{ fontSize: 30 }} />
+              ) : (
+                <CloseIcon sx={{ fontSize: 30 }} />
+              )}
             </Box>
           )}
           <Box
             sx={
               open
                 ? styleDropdown
-                : { display: { xs: "none", sm: "none", md: "flex" } }
+                : { display: { xs: "none", sm: "none", md: "flex" }, gap:3 }
             }
           >
-            <NavbarLink
+            <NavbarLink 
               text={"Home"}
               link={"/"}
               icon={<HomeIcon sx={{ color: "black.main", fontSize: 30 }} />}
@@ -88,24 +89,18 @@ function Navbar() {
             <NavbarLink
               text={"Venues"}
               link={"/venues"}
-              icon={
-                <SearchIcon sx={{ color: "black.main", fontSize: 30 }} />
-              }
+              icon={<SearchIcon sx={{ color: "black.main", fontSize: 30 }} />}
             />
             {auth.user ? (
               <NavbarLink
                 text={"Profile"}
                 link={"/profile"}
-                icon={
-                  <PersonIcon sx={{ color: "black.main", fontSize: 30 }} />
-                }
+                icon={<PersonIcon sx={{ color: "black.main", fontSize: 30 }} />}
               />
             ) : (
               <NavbarModal
                 text={"Profile"}
-                icon={
-                  <PersonIcon sx={{ color: "black.main", fontSize: 30 }} />
-                }
+                icon={<PersonIcon sx={{ color: "black.main", fontSize: 30 }} />}
               />
             )}
           </Box>

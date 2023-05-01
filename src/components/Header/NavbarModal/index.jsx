@@ -1,6 +1,6 @@
 import { useState } from "react";
-import RegisterForm from "../../components/Form/RegisterForm"
-import LoginForm from "../../components/Form/LoginForm";
+import RegisterForm from "../../Form/RegisterForm"
+import LoginForm from "../../Form/LoginForm";
 import { Box, Typography, Modal } from "@mui/material";
 
 function NavbarModal({ icon, text }) {
@@ -15,14 +15,13 @@ function NavbarModal({ icon, text }) {
       <Box
         onClick={handleOpen}
         sx={{
-          width: 1,
           display: "flex",
           alignItems: "center",
           justifyContent: "start",
         }}
       >
         {icon}
-        <Typography variant="h2" sx={{ ml: 1 }}>
+        <Typography variant="h2" >
           {text}
         </Typography>
       </Box>
