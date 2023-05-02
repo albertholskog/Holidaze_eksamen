@@ -1,4 +1,6 @@
 import { Avatar, Box, Grid, Typography, Divider } from "@mui/material";
+import DataPicker from "../DataPicker";
+import VenuesBooking from "../VenueBooking";
 
 function VenuesInfo({
   created,
@@ -12,11 +14,12 @@ function VenuesInfo({
   ownerAvatar,
   price,
   rating,
+  bookings,
 }) {
   return (
     <>
-      <Grid container >
-        <Grid item xs={6} sx={{ pt: 2}}>
+      <Grid container>
+        <Grid item xs={6} sx={{ pt: 2 }}>
           <Typography variant="h4">{name}</Typography>
           <Typography variant="h4">{city}</Typography>
           <Typography>${price}</Typography>
@@ -53,7 +56,9 @@ function VenuesInfo({
             <Typography variant="h4">Information about venue</Typography>
             <Typography variant="p">{description}</Typography>
           </Grid>
-          <Typography>calender</Typography>
+          <Grid>
+          <VenuesBooking bookings={bookings}/>
+          </Grid>
         </Grid>
         <Grid item>
           <Grid item sx={{ mt: 4 }}>

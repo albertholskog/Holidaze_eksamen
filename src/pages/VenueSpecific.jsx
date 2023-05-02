@@ -8,10 +8,10 @@ function VenueSpecific() {
   const { data, isLoading } = useApi(
     `https://api.noroff.dev/api/v1/holidaze/venues/${id}?_owner=true&_bookings=true`
   );
-  console.log(data);
+ 
 
   if (isLoading) {
-    return <div>wrmpwmr</div>;
+    return <div>error</div>;
   }
   return (
     <Box>
@@ -34,6 +34,7 @@ function VenueSpecific() {
         ownerAvatar={data.owner.avatar}
         price={data.price}
         rating={data.rating}
+        bookings={data.bookings}
       />
     </Box>
   );
