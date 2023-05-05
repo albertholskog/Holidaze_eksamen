@@ -1,5 +1,5 @@
 import { Avatar, Box, Grid, Typography, Divider } from "@mui/material";
-import DataPicker from "../DataPicker";
+
 import VenuesBooking from "../VenueBooking";
 
 function VenuesInfo({
@@ -57,7 +57,7 @@ function VenuesInfo({
             <Typography variant="p">{description}</Typography>
           </Grid>
           <Grid>
-          <VenuesBooking bookings={bookings}/>
+          <VenuesBooking bookings={bookings} maxGuests={maxGuests} id={id} name={name} price={price}/>
           </Grid>
         </Grid>
         <Grid item>

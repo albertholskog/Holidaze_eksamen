@@ -5,13 +5,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useState } from "react";
 
-function DataPicker({ bookings, label }) {
-  const [selectedDate, setSelectedDate] = useState(null);
-  
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+function DataPicker({ bookings, label, onSelectDate }) {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate);
+    onSelectDate(newDate);
   };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DatePicker", "DatePicker"]}>
