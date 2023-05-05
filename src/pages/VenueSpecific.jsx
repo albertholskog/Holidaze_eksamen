@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import useApi from "../Hooks/useApi";
+import useApi from "../hooks/useApi";
 import VenuesInfo from "../components/VenueInfo";
 import { Box } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
