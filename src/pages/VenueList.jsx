@@ -1,4 +1,4 @@
-import useApi from "../Hooks/useApi";
+import useApi from "../hooks/useApi";
 import CardVenue from "../components/Card";
 import { Grid } from "@mui/material";
 import noImage from "../image/noImage.jpg"
