@@ -1,7 +1,9 @@
-import useApi from "../hooks/useApi";
+import useApi from "../Hooks/useApi";
 import CardVenue from "../components/Card";
 import { Grid } from "@mui/material";
 import noImage from "../image/noImage.jpg"
+
+
 function VenueList() {
   const { data } = useApi("https://api.noroff.dev/api/v1/holidaze/venues");
   
