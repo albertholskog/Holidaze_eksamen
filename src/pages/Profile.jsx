@@ -1,18 +1,22 @@
+import { Grid } from "@mui/material";
 import { useAuth } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
+import ProfileInfo from "../components/ProfileInfo";
+import ProfileVenues from "../components/ProfileVenues";
 
 function Profile() {
   const auth = useAuth();
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const handelLogout = () => {
     auth.logout();
-    localStorage.clear()
-    navigate("/")
+    localStorage.clear();
+    navigate("/");
   };
   return (
-    <div>
-      <button onClick={handelLogout}>logout</button>
-    </div>
+    <Grid container>
+      <ProfileInfo /> 
+      <ProfileVenues />
+    </Grid>
   );
 }
 

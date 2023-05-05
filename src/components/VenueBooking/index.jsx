@@ -95,19 +95,19 @@ function VenuesBooking({ bookings, maxGuests, id, name, price }) {
   return (
     <Box component="form" onSubmit={handleSubmit}>
       {error && <Typography>{error}</Typography>}
-      {complete && <Typography>{complete}</Typography>}
       <InputSelect maxGuests={maxGuests} onSelectGuests={handleGuestsSelect} />
       <DataPicker
         bookings={bookings}
         label={"From"}
         onSelectDate={handleFromDateSelect}
-      />
+        />
       <DataPicker
         bookings={bookings}
         label={"To"}
         onSelectDate={handleToDateSelect}
-      />
+        />
       <Button type="submit">Book your trip</Button>
+        {complete && <Typography>{complete}</Typography>}
     </Box>
   );
 }
