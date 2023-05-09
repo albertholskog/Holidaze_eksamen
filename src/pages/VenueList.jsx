@@ -1,5 +1,5 @@
 import useApi from "../hooks/useApi"
-import CardVenue from "../components/Card";
+import CardVenue from "../components/CardVenue";
 import { Grid } from "@mui/material";
 import noImage from "../image/noImage.jpg"
 
@@ -17,7 +17,7 @@ function VenueList() {
           image={venueItem.media.length > 0 ? venueItem.media[0] : noImage}
             name={venueItem.name}
             price={venueItem.price}
-            max={venueItem.maxGuests}
+            guests={venueItem.maxGuests}
             city={venueItem.location.city.length > 0 ? venueItem.location.city : "No city specified"}
             id={venueItem.id} 
             key={venueItem.id} 

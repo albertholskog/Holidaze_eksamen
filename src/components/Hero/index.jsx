@@ -29,13 +29,11 @@ function Hero() {
         </Button>
       </Grid>
       <Grid item sm={12} md={7}>
-        <img
+        <Box
+          component="img"
+          sx={{}}
+          alt="The house from the offer."
           src={hero}
-          alt=""
-          sx={{
-            width: "100%",
-           
-          }}
         />
       </Grid>
     </Grid>

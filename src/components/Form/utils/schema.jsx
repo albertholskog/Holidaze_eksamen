@@ -35,3 +35,21 @@ export const schemaLogin = yup.object({
     .required("Password is required")
     .min(8, "Password must be at least 8 characters"),
 });
+
+export const schemaUpdateProfilePhoto = yup.object({
+  avatar: yup
+    .string()
+    .url("Please enter a valid URL")
+    .required("URL is required"),
+});
+
+export const schemaAddVenue = yup.object({
+  name: yup.string("test").required(""),
+  description: yup.string().required(""),
+  
+  price: yup.number(),
+  maxGuests: yup.number(),
+  address: yup.string(),
+  city: yup.string(),
+  country: yup.string(),
+});

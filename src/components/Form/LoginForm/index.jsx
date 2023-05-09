@@ -41,6 +41,7 @@ function LoginForm() {
       if (response.ok) {
         
         localStorage.setItem("accessToken", result.accessToken);
+        localStorage.setItem("name", result.name);
         auth.login(true);
       } else {
         setErrorApiMessage(result.errors[0].message);

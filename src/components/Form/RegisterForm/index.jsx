@@ -11,6 +11,7 @@ import { useAuth } from "../../../utils/auth";
 function RegisterForm() {
   const [errorApiMessage, setErrorApiMessage] = useState(null);
   const auth = useAuth();
+  
   const {
     handleSubmit,
     formState: { errors },
@@ -58,6 +59,7 @@ function RegisterForm() {
           const result = await response.json();
           if (response.ok) {
             localStorage.setItem("accessToken", result.accessToken);
+            localStorage.setItem("name", result.name);
             auth.login(true);
           }
         } catch (error) {
