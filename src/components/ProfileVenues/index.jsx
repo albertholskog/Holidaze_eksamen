@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Button, Grid, Typography, Box } from "@mui/material";
 import CardVenue from "../CardVenue";
 
-function ProfileVenues({ bookings, venueManager, venues }) {
+function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
   const [showAllBookings, setShowAllBookings] = useState(false);
   const [showAllVenues, setShowAllVenues] = useState(false);
-  console.log(venues);
-  console.log(venueManager);
+ 
 
   const sortBookings = [...bookings].sort((a, b) => {
     return new Date(a.dateFrom) - new Date(b.dateFrom);
@@ -26,27 +25,27 @@ function ProfileVenues({ bookings, venueManager, venues }) {
       >
         <Grid item xs={12}>
           <Typography variant="h4" sx={{ mb: 2 }}>
-            Your booking
+            Your venues
           </Typography>
         </Grid>
-        {venueManager && venuesToDisplay.map((bookings) => (
-          <CardVenue
-            venueManager={venueManager}
-            key={bookings.id}
-            profile={true}
-            image={bookings.media}
-            guests={bookings.maxGuests}
-            name={bookings.name}
-            id={bookings.id}
-            city={bookings.location.city}
-          />
-        ))}
+        {venueManager &&
+          venuesToDisplay.map((bookings) => (
+            <CardVenue
+           
+              setRefetch={setRefetch}
+              venueManager={venueManager}
+              key={bookings.id}
+              profile={true}
+              image={bookings.media}
+              guests={bookings.maxGuests}
+              name={bookings.name}
+              id={bookings.id}
+              city={bookings.location.city}
+            />
+          ))}
         {!showAllVenues && venues.length > 2 && (
-          <Box sx={{ display: "flex", justifyContent: "start", mb:10}}>
-            <Button
-              variant="contained"
-              onClick={() => setShowAllVenues(true)}
-            >
+          <Box sx={{ display: "flex", justifyContent: "start", mb: 10 }}>
+            <Button variant="contained" onClick={() => setShowAllVenues(true)}>
               Show all
             </Button>
           </Box>
@@ -69,13 +68,16 @@ function ProfileVenues({ bookings, venueManager, venues }) {
             dateTo={booking.dateTo}
           />
         ))}
-      {!showAllBookings && sortBookings.length > 2 && (
-        <Box sx={{ display: "flex", justifyContent: "start" }}>
-          <Button variant="contained" onClick={() => setShowAllBookings(true)}>
-            Show all
-          </Button>
-        </Box>
-      )}
+        {!showAllBookings && sortBookings.length > 2 && (
+          <Box sx={{ display: "flex", justifyContent: "start" }}>
+            <Button
+              variant="contained"
+              onClick={() => setShowAllBookings(true)}
+            >
+              Show all
+            </Button>
+          </Box>
+        )}
       </Grid>
     </Grid>
   );

@@ -5,8 +5,11 @@ import { useAuth } from "../../utils/auth";
 function RequireAuth({children}) {
 
     const auth = useAuth()
-    
-    if (!auth.user) {
+   
+    const checkLocal = localStorage.getItem("accessToken")
+
+    if (!auth.user && !checkLocal) {
+      
         return <Navigate to="/"/>
     }
   return children

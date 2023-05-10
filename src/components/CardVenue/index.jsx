@@ -9,6 +9,8 @@ import {
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import CardActions from "../CardActions";
+import ScrollDialog from "../ScrollDialog";
+import AddVenueForm from "../Form/AddVenueForm";
 
 function CardVenue({
   image,
@@ -21,6 +23,8 @@ function CardVenue({
   dateTo,
   profile,
   venueManager,
+  setRefetch,
+  venues,
 }) {
   const from = dayjs(dateFrom).format("DD/MM/YYYY");
   const to = dayjs(dateTo).format("DD/MM/YYYY");
@@ -41,12 +45,15 @@ function CardVenue({
               image={image}
               alt={name}
             />
-            <CardActions id={id} />
+            <CardActions id={id} setRefetch={setRefetch} />
           </Box>
           <CardContent sx={{ p: 0, display: "flex", flexDirection: "column" }}>
             <Typography variant="h6" sx={{ fontWeight: 600 }}>
               {name}
             </Typography>
+            <ScrollDialog buttonText="Add venue">
+              <AddVenueForm setRefetch={setRefetch} />
+            </ScrollDialog>
             <Typography variant="p">Booked for {guests} guests</Typography>
             {city ? (
               <Typography variant="p">City: {city}</Typography>

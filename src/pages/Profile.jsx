@@ -6,7 +6,7 @@ import useApi from "../hooks/useApi";
 
 function Profile() {
   const [refetch, setRefetch] = useState(false);
-  console.log(refetch);
+ 
   const token = localStorage.getItem("accessToken");
   const name = localStorage.getItem("name");
   const { data, isLoading, catchError, responseError } = useApi(
@@ -15,6 +15,7 @@ function Profile() {
     token,
     refetch
   );
+  
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -22,7 +23,7 @@ function Profile() {
   if (catchError || !responseError) {
     return <p>Error: Unable to fetch data</p>;
   }
-  
+
   return (
     <Grid
       container
@@ -44,6 +45,7 @@ function Profile() {
         setRefetch={setRefetch}
       />
       <ProfileVenues
+        setRefetch={setRefetch}
         bookings={data.bookings}
         venueManager={data.venueManager}
         venues={data.venues}

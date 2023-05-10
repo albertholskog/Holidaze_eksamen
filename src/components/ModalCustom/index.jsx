@@ -23,7 +23,7 @@ function ModalCustom({ buttonText, children, icon }) {
     return (
       <>
         <Box onClick={handleOpen}>{icon}</Box>
-        <Modal open={open} onClose={handleClose}>
+        <Modal open={open} onClose={handleClose} sx={{overflow:"scroll"} }>
           <Box sx={style}>{children}</Box>
         </Modal>
       </>

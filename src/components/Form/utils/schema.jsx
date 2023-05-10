@@ -46,10 +46,13 @@ export const schemaUpdateProfilePhoto = yup.object({
 export const schemaAddVenue = yup.object({
   name: yup.string("test").required(""),
   description: yup.string().required(""),
-  
+
   price: yup.number(),
   maxGuests: yup.number(),
   address: yup.string(),
   city: yup.string(),
   country: yup.string(),
+});
+export const schemaUpdateVenue = yup.object({
+  name: yup.string("test").required(""),
 });

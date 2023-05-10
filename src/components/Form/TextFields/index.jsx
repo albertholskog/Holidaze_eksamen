@@ -2,7 +2,26 @@ import { FormControl, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { inputErrors } from "../utils/inputErrors";
 import ErrorMessage from "../ErrorMessage";
-function TextFields({ label, control, name, errors }) {
+function TextFields({ label, control, name, errors, notRequired }) {
+  if (notRequired) {
+    return (
+      <FormControl fullWidth sx={{ mb: "1rem" }}>
+        <Controller
+          name={name}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              {...inputErrors(errors[name])}
+              label={label}
+              variant="filled"
+            />
+          )}
+        />
+        {errors[name] ? <ErrorMessage message={errors[name].message} /> : null}
+      </FormControl>
+    );
+  }
   return (
     <FormControl fullWidth sx={{ mb: "1rem" }}>
       <Controller
@@ -10,7 +29,7 @@ function TextFields({ label, control, name, errors }) {
         control={control}
         render={({ field }) => (
           <TextField
-          required
+            required
             {...field}
             {...inputErrors(errors[name])}
             label={label}
@@ -18,7 +37,7 @@ function TextFields({ label, control, name, errors }) {
           />
         )}
       />
-      {errors[name] ? <ErrorMessage message={errors[name].message} />:null}
+      {errors[name] ? <ErrorMessage message={errors[name].message} /> : null}
     </FormControl>
   );
 }

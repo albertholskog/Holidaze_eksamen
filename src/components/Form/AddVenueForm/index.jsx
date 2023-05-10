@@ -5,9 +5,10 @@ import TextFields from "../TextFields";
 import { Box, Button, Typography } from "@mui/material";
 import CheckboxFields from "../CheckboxFields";
 import { useState } from "react";
+import { extractMediaItems } from "../utils/extractMediaItems";
 
-function AddVenueForm({setRefetch}) {
-  
+
+function AddVenueForm({ setRefetch }) {
   const [mediaFields, setMediaFields] = useState(1);
 
   const {
@@ -18,7 +19,6 @@ function AddVenueForm({setRefetch}) {
     defaultValues: {
       name: "",
       description: "",
-
       price: "",
       maxGuests: "",
       wifi: false,
@@ -39,14 +39,23 @@ function AddVenueForm({setRefetch}) {
   };
 
   const onSubmitAddVenue = async (data) => {
-    const media = Object.keys(data)
-      .filter((key) => key.startsWith("media") && data[key] !== undefined)
-      .map((key) => data[key]);
+    console.log(data);
+    const media = extractMediaItems(data);
+
+    const location = {
+      address: data.address,
+      city: data.city,
+      country: data.country,
+    };
 
     let formData = {
       ...data,
       media,
+      location,
     };
+    delete formData.city;
+    delete formData.country;
+    delete formData.address;
     delete formData.media0;
     delete formData.media1;
     delete formData.media2;
