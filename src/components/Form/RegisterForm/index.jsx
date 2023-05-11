@@ -94,6 +94,7 @@ function RegisterForm() {
         control={control}
         name="avatar"
         label="Profile images"
+        notRequired
       />
       <SwitchInput errors={errors} control={control} name="venueManager" />
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>

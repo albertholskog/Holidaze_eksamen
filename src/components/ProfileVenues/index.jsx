@@ -5,7 +5,6 @@ import CardVenue from "../CardVenue";
 function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
   const [showAllBookings, setShowAllBookings] = useState(false);
   const [showAllVenues, setShowAllVenues] = useState(false);
- 
 
   const sortBookings = [...bookings].sort((a, b) => {
     return new Date(a.dateFrom) - new Date(b.dateFrom);
@@ -14,6 +13,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
   const bookingsToDisplay = showAllBookings
     ? sortBookings
     : sortBookings.slice(0, 2);
+    
   const venuesToDisplay = showAllVenues ? venues : venues.slice(0, 2);
 
   return (
@@ -23,26 +23,34 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
         maxWidth={1}
         sx={{ display: "flex", justifyContent: "space-between" }}
       >
-        <Grid item xs={12}>
-          <Typography variant="h4" sx={{ mb: 2 }}>
-            Your venues
-          </Typography>
-        </Grid>
-        {venueManager &&
-          venuesToDisplay.map((bookings) => (
-            <CardVenue
-           
-              setRefetch={setRefetch}
-              venueManager={venueManager}
-              key={bookings.id}
-              profile={true}
-              image={bookings.media}
-              guests={bookings.maxGuests}
-              name={bookings.name}
-              id={bookings.id}
-              city={bookings.location.city}
-            />
-          ))}
+        {venueManager ? (
+          <Grid item xs={12}>
+            {venuesToDisplay.length > 0 ? (
+              <Typography variant="h4" sx={{ mb: 2 }}>
+                Your venues
+              </Typography>
+            ) : (
+              <Typography variant="h4" sx={{ mb: 2 }}>
+                You have not added any venues.
+              </Typography>
+            )}
+          </Grid>
+        ) : null}
+        {venueManager 
+          ? venuesToDisplay.map((bookings) => (
+              <CardVenue
+                setRefetch={setRefetch}
+                venueManager={venueManager}
+                key={bookings.id}
+                profile={true}
+                image={bookings.media}
+                guests={bookings.maxGuests}
+                name={bookings.name}
+                id={bookings.id}
+                city={bookings.location.city}
+              />
+            ))
+          : null}
         {!showAllVenues && venues.length > 2 && (
           <Box sx={{ display: "flex", justifyContent: "start", mb: 10 }}>
             <Button variant="contained" onClick={() => setShowAllVenues(true)}>
@@ -51,9 +59,15 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
           </Box>
         )}
         <Grid item xs={12}>
-          <Typography variant="h4" sx={{ mb: 2 }}>
-            Your upcoming bookings
-          </Typography>
+          {bookingsToDisplay.length > 0 ? (
+            <Typography variant="h4" sx={{ mb: 2 }}>
+              Your upcoming bookings
+            </Typography>
+          ) : (
+            <Typography variant="h4" sx={{ mb: 2 }}>
+              You haven't booked anything.
+            </Typography>
+          )}
         </Grid>
         {bookingsToDisplay.map((booking) => (
           <CardVenue

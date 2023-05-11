@@ -6,6 +6,8 @@ import { Box, Button, Typography } from "@mui/material";
 import CheckboxFields from "../CheckboxFields";
 import { useState } from "react";
 import { extractMediaItems } from "../utils/extractMediaItems";
+import { filterData } from "../utils/filterData";
+import { getLocation } from "../utils/getLocation";
 
 
 function AddVenueForm({ setRefetch }) {
@@ -21,13 +23,12 @@ function AddVenueForm({ setRefetch }) {
       description: "",
       price: "",
       maxGuests: "",
-      wifi: false,
-      parking: false,
-      breakfast: false,
-      pets: false,
       address: "",
       city: "",
       country: "",
+      media0: "",
+      media1: "",
+      media2: "",
     },
     resolver: yupResolver(schemaAddVenue),
   });
@@ -41,24 +42,14 @@ function AddVenueForm({ setRefetch }) {
   const onSubmitAddVenue = async (data) => {
     console.log(data);
     const media = extractMediaItems(data);
+    const filteredData = filterData(data);
+    const location = getLocation(data);
 
-    const location = {
-      address: data.address,
-      city: data.city,
-      country: data.country,
-    };
-
-    let formData = {
-      ...data,
+    const formData = {
+      ...filteredData,
       media,
       location,
     };
-    delete formData.city;
-    delete formData.country;
-    delete formData.address;
-    delete formData.media0;
-    delete formData.media1;
-    delete formData.media2;
 
     console.log(formData);
     try {

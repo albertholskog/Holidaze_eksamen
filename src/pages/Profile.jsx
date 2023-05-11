@@ -34,7 +34,8 @@ function Profile() {
           sm: "space-between",
           md: "space-between",
         },
-        mt: 10,
+        mt: 5,
+        mb: 10,
       }}
     >
       <ProfileInfo

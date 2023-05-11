@@ -9,14 +9,14 @@ import GetVenueInfo from "../GetVenueInfo";
 import UpdateVenueFrom from "../Form/UpdateVenueFrom";
 import AddVenueForm from "../Form/AddVenueForm";
 
-function CardActions({ id, setRefetch, venues }) {
+function CardIcon({ id, setRefetch, venues }) {
   const { data, isLoading, catchError, responseError } = useApi(
     `https://api.noroff.dev/api/v1/holidaze/venues/${id}?_bookings=true`,
     "GET"
   );
 
   const handleClick = (e) => {
-    e.preventDefault();
+   
   };
 
 
@@ -46,7 +46,7 @@ function CardActions({ id, setRefetch, venues }) {
           />
         }
       >
-        <UpdateVenueFrom  />
+        <UpdateVenueFrom id={id} setRefetch={setRefetch}/>
       </ScrollDialog>
       
       <ScrollDialog
@@ -88,4 +88,4 @@ function CardActions({ id, setRefetch, venues }) {
   );
 }
 
-export default CardActions;
+export default CardIcon;

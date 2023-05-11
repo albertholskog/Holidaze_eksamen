@@ -5,12 +5,12 @@ import {
   Typography,
   Grid,
   Box,
+
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import CardActions from "../CardActions";
-import ScrollDialog from "../ScrollDialog";
-import AddVenueForm from "../Form/AddVenueForm";
+import CardIcon from "../CardIcon";
+
 
 function CardVenue({
   image,
@@ -32,28 +32,22 @@ function CardVenue({
   if (profile && venueManager) {
     return (
       <Grid item xs={12} sm={5.7} md={5.7}>
-        <Card
-          component={Link}
-          to={`/venues/${id}`}
-          elevation={0}
-          sx={{ bgcolor: "transparent" }}
-        >
+        <Card elevation={0} sx={{ bgcolor: "transparent" }}>
           <Box sx={{ position: "relative" }}>
-            <CardMedia
-              sx={{ maxHeight: 150, minHeight: 150, borderRadius: 3 }}
-              component="img"
-              image={image}
-              alt={name}
-            />
-            <CardActions id={id} setRefetch={setRefetch} />
+            <Box component={Link} to={`/venues/${id}`}>
+              <CardMedia
+                sx={{ maxHeight: 150, minHeight: 150, borderRadius: 3 }}
+                component="img"
+                image={image}
+                alt={name}
+              />
+            </Box>
+            <CardIcon id={id} setRefetch={setRefetch} />
           </Box>
           <CardContent sx={{ p: 0, display: "flex", flexDirection: "column" }}>
             <Typography variant="h6" sx={{ fontWeight: 600 }}>
               {name}
             </Typography>
-            <ScrollDialog buttonText="Add venue">
-              <AddVenueForm setRefetch={setRefetch} />
-            </ScrollDialog>
             <Typography variant="p">Booked for {guests} guests</Typography>
             {city ? (
               <Typography variant="p">City: {city}</Typography>

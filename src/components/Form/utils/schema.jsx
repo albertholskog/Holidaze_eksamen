@@ -16,10 +16,7 @@ export const schemaRegister = yup.object({
     .string()
     .required("Password is required")
     .min(8, "Password must be at least 8 characters"),
-  avatar: yup
-    .string()
-    .required("Avatar is required")
-    .url("Avatar must be a valid URL"),
+  avatar: yup.string().url("Avatar must be a valid URL"),
 });
 
 export const schemaLogin = yup.object({
@@ -44,15 +41,66 @@ export const schemaUpdateProfilePhoto = yup.object({
 });
 
 export const schemaAddVenue = yup.object({
-  name: yup.string("test").required(""),
-  description: yup.string().required(""),
-
-  price: yup.number(),
-  maxGuests: yup.number(),
-  address: yup.string(),
-  city: yup.string(),
-  country: yup.string(),
+  name: yup.string().trim().max(100).required("Name is required"),
+  description: yup.string().trim().max(250).required("Description is required"),
+  price: yup
+    .number()
+    .min(1)
+    .typeError("Price needs to be a number")
+    .required("Price is required"),
+  maxGuests: yup
+    .number()
+    .min(1)
+    .typeError("Max guests needs to be a number")
+    .required("Max guests is required"),
+  address: yup.string().trim().max(100).required("Address is required"),
+  city: yup.string().trim().max(100).required("City is required"),
+  country: yup.string().trim().max(50).required("Country is required"),
+  media0: yup
+    .string()
+    .trim()
+    .url("Need to be a valid URL")
+    .required("Need one photo"),
+  media1: yup.string().trim().url("Need to be a valid URL").notRequired(),
+  media2: yup.string().trim().url("Need to be a valid URL").notRequired(),
 });
-export const schemaUpdateVenue = yup.object({
-  name: yup.string("test").required(""),
+
+export const schemaUpdateVenue = yup.object().shape({
+  name: yup.string().trim().max(100).optional(),
+  description: yup.string().trim().max(250).optional(),
+  price: yup
+    .number()
+    .nullable()
+    .transform((value, originalValue) => {
+      if (originalValue === "") {
+        return null;
+      }
+      return value;
+    })
+    .typeError("Price must be a number.")
+    .min(0)
+    .optional(),
+  maxGuests: yup
+    .number()
+    .nullable()
+    .transform((value, originalValue) => {
+      if (originalValue === "") {
+        return null;
+      }
+      return value;
+    })
+    .typeError("Max guests must be a number.")
+    .integer()
+    .min(1)
+    .optional(),
+  wifi: yup.boolean().optional(),
+  parking: yup.boolean().optional(),
+  breakfast: yup.boolean().optional(),
+  pets: yup.boolean().optional(),
+  address: yup.string().trim().max(100).optional(),
+  city: yup.string().trim().max(100).optional(),
+  country: yup.string().trim().max(50).optional(),
+  media0: yup.string().trim().url("Need to be a valid URL").optional(),
+  media1: yup.string().trim().url("Need to be a valid URL").optional(),
+  media2: yup.string().trim().url("Need to be a valid URL").optional(),
 });
