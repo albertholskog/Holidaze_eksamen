@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Grid, Typography, Box } from "@mui/material";
+import { Button, Grid, Typography, Box, Divider } from "@mui/material";
 import CardVenue from "../CardVenue";
 
 function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
@@ -13,7 +13,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
   const bookingsToDisplay = showAllBookings
     ? sortBookings
     : sortBookings.slice(0, 2);
-    
+
   const venuesToDisplay = showAllVenues ? venues : venues.slice(0, 2);
 
   return (
@@ -26,9 +26,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
         {venueManager ? (
           <Grid item xs={12}>
             {venuesToDisplay.length > 0 ? (
-              <Typography variant="h4" sx={{ mb: 2 }}>
-                Your venues
-              </Typography>
+              <Typography variant="h4" sx={{ mb: 2 }}>Your venues</Typography>
             ) : (
               <Typography variant="h4" sx={{ mb: 2 }}>
                 You have not added any venues.
@@ -36,7 +34,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
             )}
           </Grid>
         ) : null}
-        {venueManager 
+        {venueManager
           ? venuesToDisplay.map((bookings) => (
               <CardVenue
                 setRefetch={setRefetch}
@@ -58,15 +56,19 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
             </Button>
           </Box>
         )}
+
         <Grid item xs={12}>
           {bookingsToDisplay.length > 0 ? (
             <Typography variant="h4" sx={{ mb: 2 }}>
               Your upcoming bookings
             </Typography>
           ) : (
-            <Typography variant="h4" sx={{ mb: 2 }}>
-              You haven't booked anything.
-            </Typography>
+            <>
+              <Divider sx={{ mb: 2 }} />
+              <Typography variant="h4" sx={{ mb: 2 }}>
+                You haven't booked anything.
+              </Typography>
+            </>
           )}
         </Grid>
         {bookingsToDisplay.map((booking) => (

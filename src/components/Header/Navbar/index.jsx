@@ -28,8 +28,6 @@ function Navbar() {
     }
   }, [matches]);
 
-  
-
   const styleDropdown = {
     position: "fixed",
     top: 0,
@@ -43,11 +41,11 @@ function Navbar() {
     justifyContent: "center",
     alignContent: "center",
     flexWrap: "wrap",
-    zIndex: 1,
-    gap:5
+    zIndex: 10,
+    gap: 5,
   };
   return (
-    <AppBar position="static" elevation={0} color="transparent">
+    <AppBar position="static" elevation={0} color="transparent" sx={{mb:5}}>
       <Container maxWidth={"lg"}>
         <Toolbar
           disableGutters
@@ -60,13 +58,8 @@ function Navbar() {
           <Typography variant="h1" aria-label="Holidaze logo">
             <Logo />
           </Typography>
-          {matches ? (
-            ""
-          ) : (
-            <Box
-              sx={{ zIndex: 2, pt:2 }}
-              onClick={() => setOpen(!open)}
-            >
+          {matches ? null : (
+            <Box sx={{ zIndex: 20, pt: 2 }} onClick={() => setOpen(!open)}>
               {!open ? (
                 <MenuIcon sx={{ fontSize: 30 }} />
               ) : (
@@ -78,24 +71,30 @@ function Navbar() {
             sx={
               open
                 ? styleDropdown
-                : { display: { xs: "none", sm: "none", md: "flex" }, gap:3 }
+                : {
+                    display: { xs: "none", sm: "none", md: "flex" },
+                    gap: 3,
+                  }
             }
           >
-            <NavbarLink 
+            <NavbarLink
               text={"Home"}
               link={"/"}
               icon={<HomeIcon sx={{ color: "black.main", fontSize: 30 }} />}
+              onClick={() => setOpen(false)}
             />
             <NavbarLink
               text={"Venues"}
               link={"/venues"}
               icon={<SearchIcon sx={{ color: "black.main", fontSize: 30 }} />}
+              onClick={() => setOpen(false)}
             />
             {auth.user ? (
               <NavbarLink
                 text={"Profile"}
                 link={"/profile"}
                 icon={<PersonIcon sx={{ color: "black.main", fontSize: 30 }} />}
+                onClick={() => setOpen(false)}
               />
             ) : (
               <NavbarModal

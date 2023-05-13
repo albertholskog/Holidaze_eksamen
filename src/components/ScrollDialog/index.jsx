@@ -8,7 +8,7 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { Box } from "@mui/material";
 
-function ScrollDialog({ buttonText, children, title, icon }) {
+function ScrollDialog({ buttonText, children, title, icon, navbarTitle }) {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
 
@@ -34,20 +34,31 @@ function ScrollDialog({ buttonText, children, title, icon }) {
   if (icon) {
     return (
       <>
-        <Box onClick={handleClickOpen("body")}>{icon}</Box>
+        <Box
+          onClick={handleClickOpen("body")}
+          sx={{ display: "flex", alignItems: "center", cursor:"pointer" }}
+        >
+          {icon}
+          {navbarTitle}
+        </Box>
         <Dialog
           open={open}
           onClose={handleClose}
           scroll={scroll}
           aria-labelledby={`scroll-dialog-${title}`}
         >
-          <DialogTitle id={`scroll-dialog-${title}`}>{title}</DialogTitle>
+          <DialogTitle
+            sx={{ textAlign: "center" }}
+            id={`scroll-dialog-${title}`}
+          >
+            {title}
+          </DialogTitle>
           <DialogContent dividers={scroll === "paper"}>
             {children}
           </DialogContent>
           <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+          </DialogActions>
         </Dialog>
       </>
     );

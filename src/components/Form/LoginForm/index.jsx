@@ -66,7 +66,7 @@ function LoginForm() {
       />
       {errorApiMessage ? <ErrorMessage message={errorApiMessage} /> : null}
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>
-        Login
+        Sign in
       </Button>
     </Box>
   );

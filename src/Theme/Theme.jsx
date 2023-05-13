@@ -20,25 +20,22 @@ export const lightTheme = createTheme({
   },
   typography: {
     fontFamily: "Open Sans",
-    
     color: color.black,
     h2: {
       fontFamily: "Cantarell",
-      fontWeight: 500,
-      fontSize: 34,
       color: color.black,
+      fontSize: 18,
     },
     h3: {
       fontFamily: "Cantarell",
-      fontWeight: 600,
-      fontSize: 24,
       color: color.black,
+      fontSize:20,
+      fontWeight: "600",
     },
     h4: {
       fontFamily: "Cantarell",
-      fontWeight: 500,
-      fontSize: 24,
       color: color.black,
+      
     },
   },
 });

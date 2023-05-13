@@ -2,26 +2,23 @@ import { useParams } from "react-router-dom";
 import useApi from "../hooks/useApi";
 import VenuesInfo from "../components/VenueInfo";
 import { Box } from "@mui/material";
+import CarouselVenue from "../components/Carousel/CarouselVenue";
 import Carousel from "react-material-ui-carousel";
 function VenueSpecific() {
   const { id } = useParams();
-  const { data, isLoading } = useApi(
+  const { data, isLoading, catchError, responseError } = useApi(
     `https://api.noroff.dev/api/v1/holidaze/venues/${id}?_owner=true&_bookings=true`
   );
- 
 
   if (isLoading) {
-    return <div>error</div>;
+    return <div>Loading</div>;
+  }
+  if (catchError || responseError) {
+    return <p>Error</p>;
   }
   return (
     <Box>
-      <Carousel>
-        <img
-          src={data.media}
-          alt=""
-          style={{ height: "auto", width: "500px" }}
-        />
-      </Carousel>
+      <CarouselVenue media={data.media} name={data.name}/>
       <VenuesInfo
         created={data.created}
         description={data.description}

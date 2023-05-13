@@ -18,7 +18,7 @@ function useApi(url, method, token, refetch) {
             Authorization: `Bearer ${token}`,
           },
         });
-        setResponseError(response.ok);
+        setResponseError(!response.ok);
         const json = await response.json();
         setData(json);
         setIsLoading(false);

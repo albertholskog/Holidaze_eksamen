@@ -19,55 +19,54 @@ function VenuesInfo({
   return (
     <>
       <Grid container>
-        <Grid item xs={6} sx={{ pt: 2 }}>
-          <Typography variant="h4">{name}</Typography>
-          <Typography variant="h4">{city}</Typography>
-          <Typography>${price}</Typography>
-          <Typography>Rooms for {maxGuests} people</Typography>
-        </Grid>
         <Grid
           item
-          xs={6}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "start",
-            alignItems: "end",
-            pt: 2,
-          }}
+          xs={12}
+          sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}
         >
+          <Box>
+            <Typography variant="h4" sx={{ mb: 3 }}>
+              {name}
+            </Typography>
+            <Typography variant="p">City: {city}</Typography>
+            <Typography sx={{ mt: 0.5 }}>Max guests {maxGuests} </Typography>
+          </Box>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
+              justifyContent: "space-between",
               alignItems: "center",
             }}
           >
-            <Avatar>{ownerAvatar}</Avatar>
-            <Typography>{ownerName}</Typography>
+            <Box>
+              <Avatar>{ownerAvatar}</Avatar>
+              <Typography>{ownerName}</Typography>
+            </Box>
+            <Typography>${price} per night</Typography>
           </Box>
         </Grid>
       </Grid>
-      <Divider />
+      <Divider sx={{mt:2}}/>
       <Grid container>
         <Grid container sx={{ mt: 2 }}>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <Typography variant="h4">Information about venue</Typography>
             <Typography variant="p">{description}</Typography>
           </Grid>
-          <Grid>
-          <VenuesBooking bookings={bookings} maxGuests={maxGuests} id={id} name={name} price={price}/>
+          <Grid item xs={12}>
+            <VenuesBooking
+              bookings={bookings}
+              maxGuests={maxGuests}
+              id={id}
+              name={name}
+              price={price}
+            />
           </Grid>
         </Grid>
         <Grid item>
           <Grid item sx={{ mt: 4 }}>
             <Typography variant="h4">What this place offers</Typography>
-            {Object.entries(meta).map(([key, value]) => (
-              <Typography key={key}>
-                {key}: {value ? "Yes" : "No"}
-              </Typography>
-            ))}
           </Grid>
         </Grid>
       </Grid>

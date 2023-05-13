@@ -20,7 +20,7 @@ function Profile() {
     return <p>Loading...</p>;
   }
 
-  if (catchError || !responseError) {
+  if (catchError || responseError) {
     return <p>Error: Unable to fetch data</p>;
   }
 
