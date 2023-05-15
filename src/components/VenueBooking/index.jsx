@@ -46,7 +46,6 @@ function VenuesBooking({ bookings, maxGuests, id, name, price }) {
         guests: guests,
         venueId: id,
       };
-      console.log(body);
       const token = localStorage.getItem("accessToken");
 
       try {
@@ -61,19 +60,16 @@ function VenuesBooking({ bookings, maxGuests, id, name, price }) {
             body: JSON.stringify(body),
           }
         );
-        const json = await response.json();
-        console.log(json);
 
         if (response.ok) {
           setComplete(
-            `you have booked ${name} at the price ${price} per night `
+            `You have booked ${name} at the price ${price} per night `
           );
         } else {
           setError("Failed to book the venue, Api request failed");
         }
       } catch (error) {
         setError("An error occurred during the API call");
-        console.log("An error occurred during the API call:", error);
       }
     } else {
       setError("Dates are not available");
@@ -93,22 +89,34 @@ function VenuesBooking({ bookings, maxGuests, id, name, price }) {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
-      {error && <Typography>{error}</Typography>}
-      <InputSelect maxGuests={maxGuests} onSelectGuests={handleGuestsSelect} />
-      <DataPicker
-        bookings={bookings}
-        label={"From"}
-        onSelectDate={handleFromDateSelect}
+    <>
+      <Typography variant="h3" sx={{ mb: 2.3 }}>
+        Book venue
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit}>
+        {error && <Typography sx={{color:"error.main", mb:2}} >{error}</Typography>}
+        <InputSelect
+          maxGuests={maxGuests}
+          onSelectGuests={handleGuestsSelect}
         />
-      <DataPicker
-        bookings={bookings}
-        label={"To"}
-        onSelectDate={handleToDateSelect}
+        <DataPicker
+          bookings={bookings}
+          label={"From"}
+          onSelectDate={handleFromDateSelect}
         />
-      <Button type="submit">Book your trip</Button>
+        <DataPicker
+          bookings={bookings}
+          label={"To"}
+          onSelectDate={handleToDateSelect}
+        />
+        <Box sx={{ mt: 2.3, textAlign: "end" }}> 
+          <Button type="submit" variant="contained" >
+            Book venue
+          </Button>
+        </Box>
         {complete && <Typography>{complete}</Typography>}
-    </Box>
+      </Box>
+    </>
   );
 }
 

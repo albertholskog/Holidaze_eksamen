@@ -15,10 +15,7 @@ function CardIcon({ id, setRefetch, venues }) {
     "GET"
   );
 
-  const handleClick = (e) => {
-   
-  };
-
+ 
 
   return (
     <Box
@@ -29,7 +26,7 @@ function CardIcon({ id, setRefetch, venues }) {
         display: "flex",
         columnGap: 1,
       }}
-      onClick={handleClick}
+     
     >
       <ScrollDialog 
         icon={

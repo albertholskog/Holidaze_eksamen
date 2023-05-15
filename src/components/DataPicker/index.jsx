@@ -5,9 +5,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useState } from "react";
 
-
 function DataPicker({ bookings, label, onSelectDate }) {
   const [selectedDate, setSelectedDate] = useState(null);
+  
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
     onSelectDate(newDate);
@@ -23,6 +23,7 @@ function DataPicker({ bookings, label, onSelectDate }) {
           label={label}
           value={selectedDate}
           onChange={handleDateChange}
+          sx={{ width: 1 }}
         />
       </DemoContainer>
     </LocalizationProvider>

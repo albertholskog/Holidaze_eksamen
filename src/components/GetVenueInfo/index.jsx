@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import dayjs from "dayjs";
 
-function GetVenueInfo({ id, data }) {
+function GetVenueInfo({data }) {
  
 
   return (

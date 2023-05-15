@@ -17,7 +17,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
   const venuesToDisplay = showAllVenues ? venues : venues.slice(0, 2);
 
   return (
-    <Grid item md={6}>
+    <Grid item md={8}>
       <Grid
         container
         maxWidth={1}
@@ -26,7 +26,9 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
         {venueManager ? (
           <Grid item xs={12}>
             {venuesToDisplay.length > 0 ? (
-              <Typography variant="h4" sx={{ mb: 2 }}>Your venues</Typography>
+              <Typography variant="h4" sx={{ mb: 2, }}>
+                Your venues
+              </Typography>
             ) : (
               <Typography variant="h4" sx={{ mb: 2 }}>
                 You have not added any venues.
@@ -41,7 +43,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
                 venueManager={venueManager}
                 key={bookings.id}
                 profile={true}
-                image={bookings.media}
+                image={bookings.media[0]}
                 guests={bookings.maxGuests}
                 name={bookings.name}
                 id={bookings.id}
@@ -50,11 +52,11 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
             ))
           : null}
         {!showAllVenues && venues.length > 2 && (
-          <Box sx={{ display: "flex", justifyContent: "start", mb: 10 }}>
+          <Grid item xs={12} sx={{ mb: 10, display:"flex", justifyContent:"end"}}>
             <Button variant="contained" onClick={() => setShowAllVenues(true)}>
               Show all
             </Button>
-          </Box>
+          </Grid>
         )}
 
         <Grid item xs={12}>
@@ -75,7 +77,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
           <CardVenue
             key={booking.id}
             profile={true}
-            image={booking.venue.media}
+            image={booking.venue.media[0]}
             guests={booking.guests}
             name={booking.venue.name}
             id={booking.venue.id}
@@ -85,14 +87,14 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
           />
         ))}
         {!showAllBookings && sortBookings.length > 2 && (
-          <Box sx={{ display: "flex", justifyContent: "start" }}>
+          <Grid item xs={12} sx={{ mb: 10, display:"flex", justifyContent:"end"}}>
             <Button
               variant="contained"
               onClick={() => setShowAllBookings(true)}
             >
               Show all
             </Button>
-          </Box>
+          </Grid>
         )}
       </Grid>
     </Grid>

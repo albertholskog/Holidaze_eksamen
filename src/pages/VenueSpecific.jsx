@@ -3,7 +3,7 @@ import useApi from "../hooks/useApi";
 import VenuesInfo from "../components/VenueInfo";
 import { Box } from "@mui/material";
 import CarouselVenue from "../components/Carousel/CarouselVenue";
-import Carousel from "react-material-ui-carousel";
+
 function VenueSpecific() {
   const { id } = useParams();
   const { data, isLoading, catchError, responseError } = useApi(
@@ -18,9 +18,8 @@ function VenueSpecific() {
   }
   return (
     <Box>
-      <CarouselVenue media={data.media} name={data.name}/>
+      <CarouselVenue media={data.media} name={data.name} />
       <VenuesInfo
-        created={data.created}
         description={data.description}
         id={data.id}
         city={data.location.city}
@@ -30,7 +29,6 @@ function VenueSpecific() {
         ownerName={data.owner.name}
         ownerAvatar={data.owner.avatar}
         price={data.price}
-        rating={data.rating}
         bookings={data.bookings}
       />
     </Box>

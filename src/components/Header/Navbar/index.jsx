@@ -98,7 +98,7 @@ function Navbar() {
               />
             ) : (
               <NavbarModal
-                text={"Profile"}
+                text={"Sign in"}
                 icon={<PersonIcon sx={{ color: "black.main", fontSize: 30 }} />}
               />
             )}
