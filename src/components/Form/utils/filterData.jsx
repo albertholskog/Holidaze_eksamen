@@ -3,9 +3,18 @@ export function filterData(data) {
   for (const key in data) {
     const value = data[key];
     if (
-      !["media0", "media1", "media2", "country", "city", "address"].includes(
-        key
-      ) &&
+      ![
+        "media0",
+        "media1",
+        "media2",
+        "country",
+        "city",
+        "address",
+        "pets",
+        "breakfast",
+        "parking",
+        "wifi",
+      ].includes(key) &&
       value != null &&
       value !== ""
     ) {

@@ -8,7 +8,7 @@ import { useState } from "react";
 import { extractMediaItems } from "../utils/extractMediaItems";
 import { filterData } from "../utils/filterData";
 import { getLocation } from "../utils/getLocation";
-
+import { metaData } from "../utils/metaData";
 
 function AddVenueForm({ setRefetch }) {
   const [mediaFields, setMediaFields] = useState(1);
@@ -43,11 +43,13 @@ function AddVenueForm({ setRefetch }) {
     console.log(data);
     const media = extractMediaItems(data);
     const filteredData = filterData(data);
+    const meta = metaData(data);
     const location = getLocation(data);
 
     const formData = {
       ...filteredData,
       media,
+      meta,
       location,
     };
 

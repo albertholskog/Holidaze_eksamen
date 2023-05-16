@@ -87,7 +87,7 @@ function VenuesInfo({
         </Grid>
         <Grid item xs={12}>
           <Divider sx={{ mb: 2 }} />
-          <Typography variant="h4" sx={{ mb: 2 }}>
+          <Typography variant="h3" sx={{ mb: 2 }}>
             What this place offers
           </Typography>
           {meta.wifi ? (

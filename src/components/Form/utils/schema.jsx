@@ -42,7 +42,7 @@ export const schemaUpdateProfilePhoto = yup.object({
 
 export const schemaAddVenue = yup.object({
   name: yup.string().trim().max(100).required("Name is required"),
-  description: yup.string().trim().max(250).required("Description is required"),
+  description: yup.string().trim().max(400).required("Description is required"),
   price: yup
     .number()
     .min(1)

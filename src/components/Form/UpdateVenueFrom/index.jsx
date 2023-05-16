@@ -8,6 +8,7 @@ import CheckboxFields from "../CheckboxFields";
 import { extractMediaItems } from "../utils/extractMediaItems";
 import { filterData } from "../utils/filterData";
 import { getLocation } from "../utils/getLocation";
+import { metaData } from "../utils/metaData";
 
 function UpdateVenueFrom({ id, setRefetch }) {
   const [mediaFields, setMediaFields] = useState(1);
@@ -42,13 +43,11 @@ function UpdateVenueFrom({ id, setRefetch }) {
     const filteredData = filterData(data);
     const media = extractMediaItems(data);
     const location = getLocation(data);
+    const meta = metaData(data);
 
-    // const formData = {
-    //   ...filteredData,
-    //   ...(media.length > 0 && { media }),
-    //   ...(Object.keys(location).length > 0 && { location }),
-    // };
-    const formData = filteredData;
+    const formData = {
+      ...filteredData,
+    };
 
     if (media.length > 0) {
       formData.media = media;
@@ -57,6 +56,11 @@ function UpdateVenueFrom({ id, setRefetch }) {
     if (Object.keys(location).length > 0) {
       formData.location = location;
     }
+    if (Object.keys(meta).length > 0) {
+      formData.meta = meta;
+    }
+
+    console.log(formData);
 
     try {
       const token = localStorage.getItem("accessToken");

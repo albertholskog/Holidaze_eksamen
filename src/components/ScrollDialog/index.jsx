@@ -8,7 +8,7 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { Box } from "@mui/material";
 
-function ScrollDialog({ buttonText, children, title, icon, navbarTitle }) {
+function ScrollDialog({ buttonText, children, title, icon, navbarTitle, buttonVariant }) {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
 
@@ -65,7 +65,7 @@ function ScrollDialog({ buttonText, children, title, icon, navbarTitle }) {
   }
   return (
     <>
-      <Button onClick={handleClickOpen("body")}>{buttonText}</Button>
+      <Button onClick={handleClickOpen("body")} variant={buttonVariant}>{buttonText}</Button>
       <Dialog
         open={open}
         onClose={handleClose}

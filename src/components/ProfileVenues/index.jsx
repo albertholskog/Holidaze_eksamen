@@ -17,7 +17,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
   const venuesToDisplay = showAllVenues ? venues : venues.slice(0, 2);
 
   return (
-    <Grid item md={8}>
+    <Grid item md={7}>
       <Grid
         container
         maxWidth={1}
@@ -26,11 +26,11 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
         {venueManager ? (
           <Grid item xs={12}>
             {venuesToDisplay.length > 0 ? (
-              <Typography variant="h4" sx={{ mb: 2, }}>
+              <Typography variant="h3" sx={{ mb: 2, }}>
                 Your venues
               </Typography>
             ) : (
-              <Typography variant="h4" sx={{ mb: 2 }}>
+              <Typography variant="h3" sx={{ mb: 2 }}>
                 You have not added any venues.
               </Typography>
             )}
@@ -61,13 +61,13 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
 
         <Grid item xs={12}>
           {bookingsToDisplay.length > 0 ? (
-            <Typography variant="h4" sx={{ mb: 2 }}>
+            <Typography variant="h3" sx={{ mb: 2 }}>
               Your upcoming bookings
             </Typography>
           ) : (
             <>
               <Divider sx={{ mb: 2 }} />
-              <Typography variant="h4" sx={{ mb: 2 }}>
+              <Typography variant="h3" sx={{ mb: 2 }}>
                 You haven't booked anything.
               </Typography>
             </>

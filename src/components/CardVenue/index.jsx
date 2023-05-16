@@ -45,7 +45,7 @@ function CardVenue({
             <Typography variant="h3" >
               {name}
             </Typography>
-            <Typography variant="p">Booked for {guests} guests</Typography>
+            <Typography variant="p">Max guests: {guests}</Typography>
             {city ? (
               <Typography variant="p">City: {city}</Typography>
             ) : (

@@ -12,7 +12,7 @@ function Logout() {
     navigate("/");
   };
 
-  return <Button onClick={handelLogout}>Logout</Button>;
+  return <Button onClick={handelLogout} sx={{mt:1}}>Sign out</Button>;
 }
 
 export default Logout;
