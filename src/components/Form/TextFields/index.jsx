@@ -2,6 +2,7 @@ import { FormControl, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { inputErrors } from "../utils/inputErrors";
 import ErrorMessage from "../ErrorMessage";
+
 function TextFields({ label, control, name, errors, notRequired }) {
   if (notRequired) {
     return (

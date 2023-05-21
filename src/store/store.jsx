@@ -1,5 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import venueReducer from "../features/venueSlice";
+import venueSearchReducer from "../features/venueSearchSlice";
 
-export const store = configureStore({
-  reducer: {},
+const store = configureStore({
+  reducer: {
+    venues: venueReducer,
+    venueSearch: venueSearchReducer,
+  },
 });
+
+export default store;

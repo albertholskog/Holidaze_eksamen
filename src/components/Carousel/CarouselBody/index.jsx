@@ -5,9 +5,7 @@ import {useMediaQuery } from "@mui/material";
 function CarouselBody({data}) {
   const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
-if (data) {
-  
-}
+
   if (data && matches) {
     const slideOne = data.slice(0, 3);
     const slideTwo = data.slice(3, 6);

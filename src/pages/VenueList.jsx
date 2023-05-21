@@ -1,43 +1,70 @@
-import useApi from "../hooks/useApi";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchVenues } from "../features/VenueSlice";
 import CardVenue from "../components/CardVenue";
 import { Grid } from "@mui/material";
-
-import { filterVenuesByMediaAndName } from "../utils/filterVenuesByMediaAndName";
+import SearchBar from "../components/SearchBar";
+import { searchMatch } from "../utils/searchMatch";
 
 function VenueList() {
-  const { data, isLoading, catchError, responseError } = useApi(
-    "https://api.noroff.dev/api/v1/holidaze/venues?sortOrder=asc&_owner=true",
-    "GET"
+  const dispatch = useDispatch();
+  const { data, loading, error, lastFetchTime } = useSelector(
+    (state) => state.venues
   );
-  const filteredData = filterVenuesByMediaAndName(data);
-  
-  if (isLoading) {
+  console.log(data);
+  const searchData = useSelector((state) => state.venueSearch.searchData);
+  console.log(searchData);
+
+  const filteredVenues = searchData ? searchMatch(
+    searchData.destination,
+    searchData.guests,
+    searchData.priceRange,
+    data
+  ): null;
+
+
+  console.log(filteredVenues);
+  const venuesToRender = filteredVenues || data;
+  useEffect(() => {
+    if (
+      !data.length ||
+      (lastFetchTime && Date.now() - lastFetchTime >= 5 * 60 * 1000)
+    ) {
+      dispatch(fetchVenues());
+    }
+  }, [data.length, dispatch, lastFetchTime]);
+
+  if (loading) {
     return <p>Loading...</p>;
   }
 
-  if (catchError || responseError) {
-    return <p>Error</p>;
+  if (error) {
+    return <p>Error: {error}</p>;
   }
+
   return (
-    <Grid container wrap="wrap" spacing={2}>
-      {filteredData.map((venueItem) => {
-        return (
-          <CardVenue
-            image={venueItem.media[0]}
-            name={venueItem.name}
-            price={venueItem.price}
-            guests={venueItem.maxGuests}
-            city={
-              venueItem.location.city.length > 0
-                ? venueItem.location.city
-                : "No city specified"
-            }
-            id={venueItem.id}
-            key={venueItem.id}
-          />
-        );
-      })}
-    </Grid>
+    <>
+      <SearchBar />
+      <Grid container wrap="wrap" spacing={2}>
+        {venuesToRender.map((venueItem) => {
+          return (
+            <CardVenue
+              image={venueItem.media[0]}
+              name={venueItem.name}
+              price={venueItem.price}
+              guests={venueItem.maxGuests}
+              city={
+                venueItem.location.city.length > 0
+                  ? venueItem.location.city
+                  : "No city specified"
+              }
+              id={venueItem.id}
+              key={venueItem.id}
+            />
+          );
+        })}
+      </Grid>
+    </>
   );
 }
 

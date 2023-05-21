@@ -3,6 +3,7 @@ import { createTheme } from "@mui/material/styles";
 const color = {
   primary: "#B1411D",
   black: "#131415",
+  white: "#F7F7F7",
 };
 
 export const lightTheme = createTheme({
@@ -14,8 +15,11 @@ export const lightTheme = createTheme({
     black: {
       main: color.black,
     },
+    white: {
+      main: color.white,
+    },
     background: {
-      default: "#F7F7F7",
+      default: color.white,
     },
   },
   typography: {

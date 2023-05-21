@@ -1,23 +1,35 @@
-import useApi from "../hooks/useApi";
-import { filterVenuesByMediaAndName } from "../utils/filterVenuesByMediaAndName";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchVenues } from "../features/VenueSlice";
 import CarouselBody from "../components/Carousel/CarouselBody";
-function Home() {
-  const { data, isLoading, catchError, responseError } = useApi(
-    "https://api.noroff.dev/api/v1/holidaze/venues?sortOrder=asc",
-    "GET"
-  );
-  const filteredData  = filterVenuesByMediaAndName(data);
+import SearchBar from "../components/SearchBar";
 
-  if (isLoading) {
+function Home() {
+  const dispatch = useDispatch();
+  const { data, loading, error, lastFetchTime } = useSelector(
+    (state) => state.venues
+  );
+
+  useEffect(() => {
+    if (
+      !data.length ||
+      (lastFetchTime && Date.now() - lastFetchTime >= 5 * 60 * 1000)
+    ) {
+      dispatch(fetchVenues());
+    }
+  }, [data.length, dispatch, lastFetchTime]);
+
+  if (loading) {
     return <p>Loading...</p>;
   }
 
-  if (catchError || responseError) {
-    return <p>Error</p>;
+  if (error) {
+    return <p>Error: {error}</p>;
   }
   return (
     <>
-      <CarouselBody data={filteredData} />
+      <SearchBar />
+      <CarouselBody data={data} />
     </>
   );
 }
