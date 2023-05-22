@@ -9,7 +9,7 @@ import { useState } from "react";
 
 function LoginForm() {
   const auth = useAuth();
-  const [errorApiMessage, setErrorApiMessage] = useState(null);
+  const [error, setError] = useState(null);
 
   const {
     handleSubmit,
@@ -39,19 +39,19 @@ function LoginForm() {
      
 
       if (response.ok) {
-        
         localStorage.setItem("accessToken", result.accessToken);
         localStorage.setItem("name", result.name);
         auth.login(true);
       } else {
-        setErrorApiMessage(result.errors[0].message);
+        setError(result.errors[0].message);
       }
     } catch (error) {
-      console.error(error);
+      setError("Failed to Sign up, try again");
     }
   };
   return (
     <Box noValidate component="form" onSubmit={handleSubmit(onSubmitLogin)}>
+      {error && <ErrorMessage message={error} />}
       <TextFields
         errors={errors}
         control={control}
@@ -64,7 +64,6 @@ function LoginForm() {
         name="password"
         label="Password"
       />
-      {errorApiMessage ? <ErrorMessage message={errorApiMessage} /> : null}
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>
         Sign in
       </Button>

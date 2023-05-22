@@ -3,6 +3,8 @@ import { useState } from "react";
 import ProfileInfo from "../components/ProfileInfo";
 import ProfileVenues from "../components/ProfileVenues";
 import useApi from "../hooks/useApi";
+import Loader from "../components/Loader";
+import ErrorFetch from "../components/ErrorFetch";
 
 function Profile() {
   const [refetch, setRefetch] = useState(false);
@@ -16,13 +18,16 @@ function Profile() {
     refetch
   );
   
+
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (catchError || responseError) {
-    return <p>Error: Unable to fetch data</p>;
+    return <ErrorFetch message={"Failed to get response from database, try again"} />;
   }
+    
+  
 
   return (
     <Grid

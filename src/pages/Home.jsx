@@ -3,13 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchVenues } from "../features/VenueSlice";
 import CarouselBody from "../components/Carousel/CarouselBody";
 import SearchBar from "../components/SearchBar";
+import Loader from "../components/Loader";
+import ErrorFetch from "../components/ErrorFetch";
+import { Typography } from "@mui/material";
+import { getLowestPricesVenue } from "../utils/getLowestPricesVenue";
 
 function Home() {
   const dispatch = useDispatch();
   const { data, loading, error, lastFetchTime } = useSelector(
     (state) => state.venues
   );
-
+  
   useEffect(() => {
     if (
       !data.length ||
@@ -20,16 +24,25 @@ function Home() {
   }, [data.length, dispatch, lastFetchTime]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <ErrorFetch message={"Failed to get response from database, try again"} />;
   }
+  const lowestPriceVenues = getLowestPricesVenue(data);
+ 
   return (
     <>
       <SearchBar />
+      <Typography align="center" variant="h3" sx={{ mb: 3 }}>
+        Check out the new venues
+      </Typography>
       <CarouselBody data={data} />
+      <Typography align="center" variant="h3" sx={{ mb: 3,mt:10 }}>
+        Check out the cheapest venues
+      </Typography>
+      <CarouselBody data={lowestPriceVenues} />
     </>
   );
 }

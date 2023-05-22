@@ -3,6 +3,8 @@ import useApi from "../hooks/useApi";
 import VenuesInfo from "../components/VenueInfo";
 import { Box } from "@mui/material";
 import CarouselVenue from "../components/Carousel/CarouselVenue";
+import Loader from "../components/Loader";
+import ErrorFetch from "../components/ErrorFetch";
 
 function VenueSpecific() {
   const { id } = useParams();
@@ -11,10 +13,11 @@ function VenueSpecific() {
   );
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
+
   if (catchError || responseError) {
-    return <p>Error</p>;
+    return <ErrorFetch message={"Failed to get response from database, try again"} />;
   }
   return (
     <Box>

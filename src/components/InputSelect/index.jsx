@@ -9,8 +9,8 @@ function InputSelect({ maxGuests, onSelectGuests }) {
     (_, index) => index + 1
   );
 
-  const handleGuestsSelect = (event) => {
-    const selectedGuests = event.target.value;
+  const handleGuestsSelect = (e) => {
+    const selectedGuests = e.target.value;
     setGuests(selectedGuests);
     onSelectGuests(selectedGuests);
   };

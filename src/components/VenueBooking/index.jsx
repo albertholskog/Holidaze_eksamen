@@ -63,7 +63,7 @@ function VenuesBooking({ bookings, maxGuests, id, name, price }) {
 
         if (response.ok) {
           setComplete(
-            `You have booked ${name} at the price ${price} per night `
+            `You have booked "${name}" at the price ${price} per night `
           );
         } else {
           setError("Failed to book the venue, Api request failed");

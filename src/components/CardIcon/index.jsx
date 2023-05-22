@@ -7,15 +7,51 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useApi from "../../hooks/useApi";
 import GetVenueInfo from "../GetVenueInfo";
 import UpdateVenueFrom from "../Form/UpdateVenueFrom";
-import AddVenueForm from "../Form/AddVenueForm";
+import Loader from "../Loader";
+import ErrorFetch from "../ErrorFetch";
 
 function CardIcon({ id, setRefetch, venues }) {
   const { data, isLoading, catchError, responseError } = useApi(
     `https://api.noroff.dev/api/v1/holidaze/venues/${id}?_bookings=true`,
     "GET"
   );
-
  
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: "5px",
+          right: "5px",
+          display: "flex",
+          columnGap: 1,
+        }}
+      >
+        <Loader />
+      </Box>
+    );
+  }
+
+  if (catchError || responseError) {
+    return (
+      <Box
+        sx={{
+          bgcolor: "#fff",
+          position: "absolute",
+          bottom: "5px",
+          right: "5px",
+          display: "flex",
+          columnGap: 1,
+        }}
+      >
+        <ErrorFetch
+          message="Failed to retrieve content"
+          link="/"
+          label="Home"
+        />
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -26,9 +62,8 @@ function CardIcon({ id, setRefetch, venues }) {
         display: "flex",
         columnGap: 1,
       }}
-     
     >
-      <ScrollDialog 
+      <ScrollDialog
         icon={
           <ModeEditIcon
             sx={{
@@ -43,10 +78,11 @@ function CardIcon({ id, setRefetch, venues }) {
           />
         }
       >
-        <UpdateVenueFrom id={id} setRefetch={setRefetch}/>
+        <UpdateVenueFrom id={id} setRefetch={setRefetch} />
       </ScrollDialog>
-      
+
       <ScrollDialog
+      title="Info"
         icon={
           <InfoOutlinedIcon
             sx={{
@@ -63,7 +99,7 @@ function CardIcon({ id, setRefetch, venues }) {
       >
         <GetVenueInfo id={id} data={data} />
       </ScrollDialog>
-      <ScrollDialog
+      <ScrollDialog title="Delete"
         icon={
           <DeleteIcon
             sx={{
@@ -80,7 +116,6 @@ function CardIcon({ id, setRefetch, venues }) {
       >
         <DeleteVenue id={id} setRefetch={setRefetch} />
       </ScrollDialog>
-     
     </Box>
   );
 }

@@ -1,9 +1,9 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Box } from "@mui/material";
 import { useState } from "react";
+import ErrorMessage from "../Form/ErrorMessage";
 
 function DeleteVenue({ id, setRefetch }) {
-  const [error, setError] = useState(false);
-  console.log(id);
+  const [error, setError] = useState(null);
 
   const handelDelete = async () => {
     const token = localStorage.getItem("accessToken");
@@ -18,27 +18,27 @@ function DeleteVenue({ id, setRefetch }) {
           },
         }
       );
+      
       if (response.ok) {
         setRefetch((prevRefetch) => !prevRefetch);
-        setError(false);
+        setError(null);
       } else {
-        setError(true);
+        setError("Failed to delete the venue, try again");
       }
     } catch (error) {
-      console.log(error);
+      setError("Failed to delete the venue, try again");
     }
   };
 
   return (
     <>
       <Typography>Are you sure you want to delete this venue?</Typography>
-      {error ? (
-        <Typography>Failed to delete the venue, try again</Typography>
-      ) : null}
-      <Button variant="contained" onClick={handelDelete}>
-        Yes
-      </Button>
-      <Button variant="contained">No</Button>
+      {error && <ErrorMessage message={error} />}
+      <Box sx={{display:"flex", justifyContent:"center", mt:2}}>
+        <Button variant="contained" onClick={handelDelete}>
+          Yes
+        </Button>
+      </Box>
     </>
   );
 }

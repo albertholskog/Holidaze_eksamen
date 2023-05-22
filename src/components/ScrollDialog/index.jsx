@@ -8,7 +8,14 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { Box } from "@mui/material";
 
-function ScrollDialog({ buttonText, children, title, icon, navbarTitle, buttonVariant }) {
+function ScrollDialog({
+  buttonText,
+  children,
+  title,
+  icon,
+  navbarTitle,
+  buttonVariant,
+}) {
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
 
@@ -36,7 +43,7 @@ function ScrollDialog({ buttonText, children, title, icon, navbarTitle, buttonVa
       <>
         <Box
           onClick={handleClickOpen("body")}
-          sx={{ display: "flex", alignItems: "center", cursor:"pointer" }}
+          sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
         >
           {icon}
           {navbarTitle}
@@ -65,14 +72,18 @@ function ScrollDialog({ buttonText, children, title, icon, navbarTitle, buttonVa
   }
   return (
     <>
-      <Button onClick={handleClickOpen("body")} variant={buttonVariant}>{buttonText}</Button>
+      <Button onClick={handleClickOpen("body")} variant={buttonVariant}>
+        {buttonText}
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         scroll={scroll}
         aria-labelledby={`scroll-dialog-${title}`}
       >
-        <DialogTitle id={`scroll-dialog-${title}`}>{title}</DialogTitle>
+        <DialogTitle id={`scroll-dialog-${title}`} sx={{ textAlign: "center" }}>
+          {title}
+        </DialogTitle>
         <DialogContent dividers={scroll === "paper"}>{children}</DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

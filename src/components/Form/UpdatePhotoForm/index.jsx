@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaUpdateProfilePhoto } from "../utils/schema";
-import { useNavigate } from "react-router-dom";
+
 import { useState } from "react";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import TextFields from "../TextFields";
+import ErrorMessage from "../ErrorMessage";
 
-function UpdatePhotoForm() {
+function UpdatePhotoForm({ setRefetch }) {
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
   const {
     handleSubmit,
     formState: { errors },
@@ -36,18 +36,18 @@ function UpdatePhotoForm() {
         }
       );
       console.log(response);
-      if (!response.ok) {
+      if (response.ok) {
+        setRefetch((prevRefetch) => !prevRefetch);
+      } else {
         setError("An error has occurred, try another url");
-      }else{
-        navigate(0)
       }
     } catch (error) {
-        setError(error);
+      setError("An error has occurred, try another url");
     }
   };
   return (
     <Box noValidate component="form" onSubmit={handleSubmit(onSubmitUpdate)}>
-      {error && <Typography>{error}</Typography>}
+      {error && <ErrorMessage message={error} />}
       <TextFields errors={errors} control={control} name="avatar" label="Url" />
       <Box textAlign="center">
         <Button type="submit" variant="contained">

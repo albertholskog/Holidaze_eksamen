@@ -5,6 +5,8 @@ import CardVenue from "../components/CardVenue";
 import { Grid } from "@mui/material";
 import SearchBar from "../components/SearchBar";
 import { searchMatch } from "../utils/searchMatch";
+import Loader from "../components/Loader";
+import ErrorFetch from "../components/ErrorFetch";
 
 function VenueList() {
   const dispatch = useDispatch();
@@ -35,11 +37,11 @@ function VenueList() {
   }, [data.length, dispatch, lastFetchTime]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <ErrorFetch message={"Failed to get response from database, try again"} />;
   }
 
   return (

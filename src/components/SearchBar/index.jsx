@@ -35,7 +35,7 @@ function SearchBar() {
       priceRange,
     };
     dispatch(saveSearchData(searchData));
-    navigate("/venues")
+    navigate("/venues");
   };
   return (
     <Grid
@@ -44,11 +44,8 @@ function SearchBar() {
       noValidate
       onSubmit={handleSubmit}
       sx={{
-        pt: 10,
-        pb: 10,
-        pl: 5,
-        pr: 5,
-        bgcolor: "#E4DDDA",
+        p: 5,
+        bgcolor: "rgba(235, 235, 235, 1)",
         borderRadius: 2,
         display: "flex",
         justifyContent: "space-between",

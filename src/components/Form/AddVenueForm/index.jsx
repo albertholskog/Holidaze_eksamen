@@ -9,9 +9,11 @@ import { extractMediaItems } from "../utils/extractMediaItems";
 import { filterData } from "../utils/filterData";
 import { getLocation } from "../utils/getLocation";
 import { metaData } from "../utils/metaData";
+import ErrorMessage from "../ErrorMessage";
 
 function AddVenueForm({ setRefetch }) {
   const [mediaFields, setMediaFields] = useState(1);
+  const [error, setError] = useState(null);
 
   const {
     handleSubmit,
@@ -40,7 +42,6 @@ function AddVenueForm({ setRefetch }) {
   };
 
   const onSubmitAddVenue = async (data) => {
-    console.log(data);
     const media = extractMediaItems(data);
     const filteredData = filterData(data);
     const meta = metaData(data);
@@ -53,7 +54,6 @@ function AddVenueForm({ setRefetch }) {
       location,
     };
 
-    console.log(formData);
     try {
       const token = localStorage.getItem("accessToken");
       const response = await fetch(
@@ -67,17 +67,18 @@ function AddVenueForm({ setRefetch }) {
           body: JSON.stringify(formData),
         }
       );
-
-      console.log(response);
-      setRefetch((prevRefetch) => !prevRefetch);
+      if (response.ok) {
+        setRefetch((prevRefetch) => !prevRefetch);
+      }
+      setError("Failed to add new venue, try again");
     } catch (error) {
-      console.log(error);
+      setError("Failed to add new venue, try again");
     }
   };
 
   return (
     <Box noValidate component="form" onSubmit={handleSubmit(onSubmitAddVenue)}>
-      <Typography>Add Venue</Typography>
+      {error && <ErrorMessage message={error} />}
       <TextFields errors={errors} control={control} name="name" label="Title" />
       <TextFields
         errors={errors}
@@ -149,6 +150,7 @@ function AddVenueForm({ setRefetch }) {
           <Button onClick={handelAddField}>Add more Photo</Button>
         ) : null}
       </Box>
+    
       <Button variant="contained" type="submit">
         Add venue
       </Button>

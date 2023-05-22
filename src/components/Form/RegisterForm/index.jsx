@@ -9,9 +9,9 @@ import ErrorMessage from "../ErrorMessage";
 import { useAuth } from "../../../utils/auth";
 
 function RegisterForm() {
-  const [errorApiMessage, setErrorApiMessage] = useState(null);
+  const [error, setError] = useState(null);
   const auth = useAuth();
-  
+
   const {
     handleSubmit,
     formState: { errors },
@@ -39,14 +39,11 @@ function RegisterForm() {
           body: JSON.stringify(data),
         }
       );
-
       const result = await response.json();
-
-      const { email, password } = data;
-      const loginData = { email, password };
       if (response.ok) {
+        const loginData = { email: data.email, password: data.password };
         try {
-          const response = await fetch(
+          const loginResponse = await fetch(
             "https://api.noroff.dev/api/v1/holidaze/auth/login",
             {
               method: "POST",
@@ -56,26 +53,28 @@ function RegisterForm() {
               body: JSON.stringify(loginData),
             }
           );
-          const result = await response.json();
-          if (response.ok) {
-            localStorage.setItem("accessToken", result.accessToken);
-            localStorage.setItem("name", result.name);
+          const loginResult = await loginResponse.json();
+          if (loginResponse.ok) {
+            localStorage.setItem("accessToken", loginResult.accessToken);
+            localStorage.setItem("name", loginResult.name);
             auth.login(true);
+          } else {
+            setError("Failed to login, please try again");
           }
         } catch (error) {
-          console.error(error);
+          setError("Failed to login, please try again");
         }
       } else {
-        setErrorApiMessage(result.errors[0].message);
+        setError(result.errors[0].message);
       }
     } catch (error) {
-      console.error(error);
+      setError("Failed to register, please try again");
     }
   };
 
   return (
     <Box noValidate component="form" onSubmit={handleSubmit(onSubmitRegister)}>
-      {errorApiMessage ? <ErrorMessage message={errorApiMessage} /> : null}
+      {error && <ErrorMessage message={error} />}
       <TextFields errors={errors} control={control} name="name" label="Name" />
       <TextFields
         errors={errors}

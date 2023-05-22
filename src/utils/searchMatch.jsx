@@ -1,7 +1,16 @@
+/**
+ * Filters venues based on search criteria.
+ *
+ * @param {string} destination - The destination or name of the venue.
+ * @param {string} guests - The number of guests.
+ * @param {string} priceRange - The price range.
+ * @param {Array} venues - An array of venue objects to filter.
+ * @returns {Array} - The filtered array of venues that match the search criteria.
+ */
+
 export function searchMatch(destination, guests, priceRange, venues) {
-  
   return venues.filter((venue) => {
-    const { name,location, maxGuests, price } = venue;
+    const { name, location, maxGuests, price } = venue;
     const { address, city, country } = location;
     const destinationMatch =
       !destination ||

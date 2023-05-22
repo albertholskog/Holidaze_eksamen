@@ -9,10 +9,11 @@ import { extractMediaItems } from "../utils/extractMediaItems";
 import { filterData } from "../utils/filterData";
 import { getLocation } from "../utils/getLocation";
 import { metaData } from "../utils/metaData";
+import ErrorMessage from "../ErrorMessage";
 
 function UpdateVenueFrom({ id, setRefetch }) {
   const [mediaFields, setMediaFields] = useState(1);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const {
     handleSubmit,
     formState: { errors },
@@ -80,17 +81,17 @@ function UpdateVenueFrom({ id, setRefetch }) {
       if (response.ok) {
         setRefetch((prevRefetch) => !prevRefetch);
       } else {
-        setError(true);
+        setError("Failed to delete the venue, try again");
       }
     } catch (error) {
-      setError(true);
+      setError("Failed to delete the venue, try again");
     }
   };
 
   return (
     <Box noValidate component="form" onSubmit={handleSubmit(onSubmitAddVenue)}>
       <Typography>Update venue</Typography>
-      {error ? <Typography>An error has occurred</Typography> : null}
+      {error && <ErrorMessage message={error} />}
       <TextFields
         errors={errors}
         control={control}

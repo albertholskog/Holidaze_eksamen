@@ -26,21 +26,29 @@ function ProfileInfo({ name, profileAvatar, venueManager, total, setRefetch }) {
         <Avatar
           variant="rounded"
           src={profileAvatar}
-          sx={{ width: 200, height: 200, borderRadius: 3,mt:1 }}
+          sx={{ width: 200, height: 200, borderRadius: 3, mt: 1 }}
         ></Avatar>
-        <ScrollDialog buttonText="Update  photo" title="Update photo" >
-          <UpdatePhotoForm />
+        <ScrollDialog buttonText="Update  photo" title="Update photo">
+          <UpdatePhotoForm  setRefetch={setRefetch}/>
         </ScrollDialog>
-        <Typography variant="p" sx={{mb:1,mt:1}}>Username: {name}</Typography>
+        <Typography variant="p" sx={{ mb: 1, mt: 1 }}>
+          Username: {name}
+        </Typography>
 
-        <Typography variant="p" sx={{mb:1}}>
+        <Typography variant="p" sx={{ mb: 1 }}>
           Venue manager: {venueManager ? "Yes" : "No"}
         </Typography>
 
-        <Typography variant="p"sx={{mb:3}}>Total bookings: {total}</Typography>
+        <Typography variant="p" sx={{ mb: 3 }}>
+          Total bookings: {total}
+        </Typography>
 
         {venueManager ? (
-          <ScrollDialog buttonText="Add venue" buttonVariant="contained">
+          <ScrollDialog
+            buttonText="Add venue"
+            buttonVariant="contained"
+            title="Add new venue"
+          >
             <AddVenueForm setRefetch={setRefetch} />
           </ScrollDialog>
         ) : null}
