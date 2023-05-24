@@ -4,6 +4,7 @@ import {
   DialogContent,
   Dialog,
   Button,
+  Typography,
 } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import { Box } from "@mui/material";
@@ -46,7 +47,8 @@ function ScrollDialog({
           sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
         >
           {icon}
-          {navbarTitle}
+          <Typography variant="h2">{navbarTitle}</Typography>
+          
         </Box>
         <Dialog
           open={open}

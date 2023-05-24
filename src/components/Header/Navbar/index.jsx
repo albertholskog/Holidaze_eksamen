@@ -80,26 +80,26 @@ function Navbar() {
             <NavbarLink
               text={"Home"}
               link={"/"}
-              icon={<HomeIcon sx={{ color: "black.main", fontSize: 30 }} />}
+              icon={<HomeIcon sx={{ color: "black.main", fontSize: 20 }} />}
               onClick={() => setOpen(false)}
             />
             <NavbarLink
               text={"Venues"}
               link={"/venues"}
-              icon={<SearchIcon sx={{ color: "black.main", fontSize: 30 }} />}
+              icon={<SearchIcon sx={{ color: "black.main", fontSize: 20 }} />}
               onClick={() => setOpen(false)}
             />
             {auth.user ? (
               <NavbarLink
                 text={"Profile"}
                 link={"/profile"}
-                icon={<PersonIcon sx={{ color: "black.main", fontSize: 30 }} />}
+                icon={<PersonIcon sx={{ color: "black.main", fontSize: 20 }} />}
                 onClick={() => setOpen(false)}
               />
             ) : (
               <NavbarModal
                 text={"Sign in"}
-                icon={<PersonIcon sx={{ color: "black.main", fontSize: 30 }} />}
+                icon={<PersonIcon sx={{ color: "black.main", fontSize: 20 }} />}
               />
             )}
           </Box>
