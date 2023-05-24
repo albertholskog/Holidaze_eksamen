@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
+import noImage from "../../../image/noImage.jpg";
 
 function CarouselVenue({ media, name }) {
   return (
@@ -17,6 +18,10 @@ function CarouselVenue({ media, name }) {
               }}
               component="img"
               src={mediaItem}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; 
+                currentTarget.src = noImage;
+              }}
               alt={name}
             />
           ))}
@@ -31,6 +36,10 @@ function CarouselVenue({ media, name }) {
           }}
           component="img"
           src={media[0]}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; 
+            currentTarget.src = noImage;
+          }}
           alt={name}
         />
       )}

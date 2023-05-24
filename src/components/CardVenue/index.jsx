@@ -9,6 +9,8 @@ import {
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import CardIcon from "../CardIcon";
+import noImage from "../../image/noImage.jpg";
+
 
 function CardVenue({
   name,
@@ -30,6 +32,10 @@ function CardVenue({
     <CardMedia
       component="img"
       image={Array.isArray(image) && image.length > 0 ? image[0] : image}
+      onError={({ currentTarget }) => {
+        currentTarget.onerror = null; 
+        currentTarget.src = noImage;
+      }}
       alt={name}
       sx={{ maxHeight: 150, minHeight: 150, borderRadius: 3 }}
     />

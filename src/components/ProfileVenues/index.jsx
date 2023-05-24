@@ -1,106 +1,88 @@
-import { useState } from "react";
-import { Button, Grid, Typography, Divider } from "@mui/material";
+import TabPanel from "@mui/lab/TabPanel";
+import { Grid, Typography } from "@mui/material";
 import CardVenue from "../CardVenue";
+import ProfileTabs from "../ProfileTabs";
 
 function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
-  const [showAllBookings, setShowAllBookings] = useState(false);
-  const [showAllVenues, setShowAllVenues] = useState(false);
-
   const sortBookings = [...bookings].sort((a, b) => {
     return new Date(a.dateFrom) - new Date(b.dateFrom);
   });
-
-  const bookingsToDisplay = showAllBookings
-    ? sortBookings
-    : sortBookings.slice(0, 2);
-
-  const venuesToDisplay = showAllVenues ? venues : venues.slice(0, 2);
-
   return (
-    <Grid item md={7}>
-      <Grid
-        container
-        maxWidth={1}
-        sx={{ display: "flex", justifyContent: "space-between" }}
-      >
-        {venueManager ? (
-          <Grid item xs={12}>
-            {venuesToDisplay.length > 0 ? (
-              <Typography variant="h3" sx={{ mb: 2, }}>
-                Your venues
-              </Typography>
-            ) : (
-              <Typography variant="h3" sx={{ mb: 2 }}>
-                You have not added any venues.
-              </Typography>
-            )}
-          </Grid>
-        ) : null}
-        {venueManager
-          ? venuesToDisplay.map((bookings) => (
-              <CardVenue
-                setRefetch={setRefetch}
-                venueManager={venueManager}
-                key={bookings.id}
-                profile={true}
-                image={bookings.media}
-                guests={bookings.maxGuests}
-                name={bookings.name}
-                id={bookings.id}
-                city={bookings.location.city}
-                address={bookings.location.address}
-                country={bookings.location.country}
-                meta={bookings.meta}
-                description={bookings.description}
-              />
-            ))
-          : null}
-        {!showAllVenues && venues.length > 2 && (
-          <Grid item xs={12} sx={{ mb: 10, display:"flex", justifyContent:"end"}}>
-            <Button variant="contained" onClick={() => setShowAllVenues(true)}>
-              Show all
-            </Button>
-          </Grid>
-        )}
-
-        <Grid item xs={12}>
-          {bookingsToDisplay.length > 0 ? (
-            <Typography variant="h3" sx={{ mb: 2 }}>
-              Your upcoming bookings
-            </Typography>
-          ) : (
-            <>
-              <Divider sx={{ mb: 2 }} />
-              <Typography variant="h3" sx={{ mb: 2 }}>
-                You haven't booked anything.
-              </Typography>
-            </>
-          )}
-        </Grid>
-        {bookingsToDisplay.map((booking) => (
-          <CardVenue
-            key={booking.id}
-            profile={true}
-            image={booking.venue.media[0]}
-            guests={booking.guests}
-            name={booking.venue.name}
-            id={booking.venue.id}
-            city={booking.venue.location.city}
-            dateFrom={booking.dateFrom}
-            dateTo={booking.dateTo}
-          />
-        ))}
-        {!showAllBookings && sortBookings.length > 2 && (
-          <Grid item xs={12} sx={{ mb: 10, display:"flex", justifyContent:"end"}}>
-            <Button
-              variant="contained"
-              onClick={() => setShowAllBookings(true)}
-            >
-              Show all
-            </Button>
-          </Grid>
-        )}
-      </Grid>
+    <Grid container item md={8}>
+      {venueManager ? (
+        <ProfileTabs titleOne="Your venues" titleTwo="Your upcoming bookings">
+          <TabPanel value="1" sx={{ p: 0, pt: 2 }}>
+            <Grid container justifyContent={"space-between"}>
+              {venues.length > 0 ? (
+                venues.map((bookings) => (
+                  <CardVenue
+                    setRefetch={setRefetch}
+                    venueManager={venueManager}
+                    key={bookings.id}
+                    profile={true}
+                    image={bookings.media}
+                    guests={bookings.maxGuests}
+                    name={bookings.name}
+                    id={bookings.id}
+                    city={bookings.location.city}
+                    address={bookings.location.address}
+                    country={bookings.location.country}
+                    meta={bookings.meta}
+                    description={bookings.description}
+                  />
+                ))
+              ) : (
+                <Typography> You have not added any venues.</Typography>
+              )}
+            </Grid>
+          </TabPanel>
+          <TabPanel value={venueManager ? "2" : "1"} sx={{ p: 0, pt: 2 }}>
+            <Grid container justifyContent={"space-between"}>
+              {sortBookings.length > 0 ? (
+                sortBookings.map((booking) => (
+                  <CardVenue
+                    key={booking.id}
+                    profile={true}
+                    image={booking.venue.media[0]}
+                    guests={booking.guests}
+                    name={booking.venue.name}
+                    id={booking.venue.id}
+                    city={booking.venue.location.city}
+                    dateFrom={booking.dateFrom}
+                    dateTo={booking.dateTo}
+                  />
+                ))
+              ) : (
+                <Typography> You haven't booked anything.</Typography>
+              )}
+            </Grid>
+          </TabPanel>
+        </ProfileTabs>
+      ) : (
+        <ProfileTabs titleOne="Your upcoming bookings">
+          <TabPanel value={venueManager ? "2" : "1"} sx={{ p: 0, pt: 2 }}>
+            <Grid container justifyContent={"space-between"}>
+              {sortBookings.length > 0 ? (
+                sortBookings.map((booking) => (
+                  <CardVenue
+                    key={booking.id}
+                    profile={true}
+                    image={booking.venue.media[0]}
+                    guests={booking.guests}
+                    name={booking.venue.name}
+                    id={booking.venue.id}
+                    city={booking.venue.location.city}
+                    dateFrom={booking.dateFrom}
+                    dateTo={booking.dateTo}
+                  />
+                ))
+              ) : (
+                <Typography> You haven't booked anything.</Typography>
+              )}
+            </Grid>
+          </TabPanel>
+        </ProfileTabs>
+      )}
     </Grid>
   );
 }
