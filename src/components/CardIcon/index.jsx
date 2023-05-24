@@ -10,12 +10,12 @@ import UpdateVenueFrom from "../Form/UpdateVenueFrom";
 import Loader from "../Loader";
 import ErrorFetch from "../ErrorFetch";
 
-function CardIcon({ id, setRefetch, venues }) {
+function CardIcon({ id, setRefetch }) {
   const { data, isLoading, catchError, responseError } = useApi(
     `https://api.noroff.dev/api/v1/holidaze/venues/${id}?_bookings=true`,
     "GET"
   );
- 
+
   if (isLoading) {
     return (
       <Box
@@ -78,11 +78,11 @@ function CardIcon({ id, setRefetch, venues }) {
           />
         }
       >
-        <UpdateVenueFrom id={id} setRefetch={setRefetch} />
+        <UpdateVenueFrom id={id} setRefetch={setRefetch} venueData={data} />
       </ScrollDialog>
 
       <ScrollDialog
-      title="Info"
+        title="Info"
         icon={
           <InfoOutlinedIcon
             sx={{
@@ -99,7 +99,8 @@ function CardIcon({ id, setRefetch, venues }) {
       >
         <GetVenueInfo id={id} data={data} />
       </ScrollDialog>
-      <ScrollDialog title="Delete"
+      <ScrollDialog
+        title="Delete"
         icon={
           <DeleteIcon
             sx={{

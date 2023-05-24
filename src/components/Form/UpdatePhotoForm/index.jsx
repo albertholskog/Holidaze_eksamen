@@ -1,9 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaUpdateProfilePhoto } from "../utils/schema";
-
 import { useState } from "react";
-
 import { Box, Button } from "@mui/material";
 import TextFields from "../TextFields";
 import ErrorMessage from "../ErrorMessage";

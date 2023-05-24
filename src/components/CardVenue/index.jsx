@@ -11,11 +11,11 @@ import dayjs from "dayjs";
 import CardIcon from "../CardIcon";
 
 function CardVenue({
-  image,
   name,
-  guests,
   price,
+  guests,
   city,
+  image,
   id,
   dateFrom,
   dateTo,
@@ -29,7 +29,7 @@ function CardVenue({
   const cardMedia = () => (
     <CardMedia
       component="img"
-      image={image}
+      image={Array.isArray(image) && image.length > 0 ? image[0] : image}
       alt={name}
       sx={{ maxHeight: 150, minHeight: 150, borderRadius: 3 }}
     />
@@ -38,9 +38,7 @@ function CardVenue({
   const cardContent = () => (
     <CardContent sx={{ p: 0, display: "flex", flexDirection: "column" }}>
       <Typography variant="h3">{name}</Typography>
-      <Typography variant="p">
-        Max guests: {guests}
-      </Typography>
+      <Typography variant="p">Max guests: {guests}</Typography>
       {city ? (
         <Typography variant="p">City: {city}</Typography>
       ) : (
@@ -49,9 +47,7 @@ function CardVenue({
     </CardContent>
   );
 
-  const cardIcons = () => (
-    <CardIcon id={id} setRefetch={setRefetch} />
-  );
+  const cardIcons = () => <CardIcon id={id} setRefetch={setRefetch} />;
 
   if (profile && venueManager) {
     return (
@@ -60,9 +56,7 @@ function CardVenue({
           <Box component={Link} to={`/venues/${id}`}>
             {cardMedia()}
           </Box>
-          <Box sx={{ position: "relative" }}>
-            {cardIcons()}
-          </Box>
+          <Box sx={{ position: "relative" }}>{cardIcons()}</Box>
           {cardContent()}
         </Card>
       </Grid>
@@ -97,9 +91,15 @@ function CardVenue({
         sx={{ bgcolor: "transparent", textDecoration: "none" }}
       >
         {cardMedia()}
-        <CardContent sx={{ display: "flex", flexDirection: "column", pl: 1, pt: 1 }}>
-          <Typography variant="h3" sx={{ mb: 0.3 }}>{name}</Typography>
-          <Typography variant="p" sx={{ mb: 0.2 }}>{city}</Typography>
+        <CardContent
+          sx={{ display: "flex", flexDirection: "column", pl: 1, pt: 1 }}
+        >
+          <Typography variant="h3" sx={{ mb: 0.3 }}>
+            {name}
+          </Typography>
+          <Typography variant="p" sx={{ mb: 0.2 }}>
+            {city}
+          </Typography>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="p">Max guests: {guests}</Typography>
             <Typography variant="p">${price} per night</Typography>

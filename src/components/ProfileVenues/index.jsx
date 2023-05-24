@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Grid, Typography, Box, Divider } from "@mui/material";
+import { Button, Grid, Typography, Divider } from "@mui/material";
 import CardVenue from "../CardVenue";
 
 function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
@@ -43,11 +43,15 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
                 venueManager={venueManager}
                 key={bookings.id}
                 profile={true}
-                image={bookings.media[0]}
+                image={bookings.media}
                 guests={bookings.maxGuests}
                 name={bookings.name}
                 id={bookings.id}
                 city={bookings.location.city}
+                address={bookings.location.address}
+                country={bookings.location.country}
+                meta={bookings.meta}
+                description={bookings.description}
               />
             ))
           : null}

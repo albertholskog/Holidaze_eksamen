@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchVenues } from "../features/VenueSlice";
+// import { fetchVenues } from "../features/VenueSlice";
 import CardVenue from "../components/CardVenue";
 import { Grid } from "@mui/material";
 import SearchBar from "../components/SearchBar";

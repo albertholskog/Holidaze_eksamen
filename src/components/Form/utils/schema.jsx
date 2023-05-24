@@ -65,42 +65,28 @@ export const schemaAddVenue = yup.object({
   media2: yup.string().trim().url("Need to be a valid URL").notRequired(),
 });
 
-export const schemaUpdateVenue = yup.object().shape({
-  name: yup.string().trim().max(100).optional(),
-  description: yup.string().trim().max(250).optional(),
-  price: yup
-    .number()
-    .nullable()
-    .transform((value, originalValue) => {
-      if (originalValue === "") {
-        return null;
-      }
-      return value;
-    })
-    .typeError("Price must be a number.")
-    .min(0)
-    .optional(),
+export const schemaUpdateVenue = yup.object({
+  name: yup.string().trim().max(100).required(),
+  description: yup.string().trim().max(250).required(),
+  price: yup.number().typeError("Price must be a number.").min(1).required(),
   maxGuests: yup
     .number()
-    .nullable()
-    .transform((value, originalValue) => {
-      if (originalValue === "") {
-        return null;
-      }
-      return value;
-    })
     .typeError("Max guests must be a number.")
     .integer()
     .min(1)
-    .optional(),
+    .required(),
   wifi: yup.boolean().optional(),
   parking: yup.boolean().optional(),
   breakfast: yup.boolean().optional(),
   pets: yup.boolean().optional(),
-  address: yup.string().trim().max(100).optional(),
-  city: yup.string().trim().max(100).optional(),
-  country: yup.string().trim().max(50).optional(),
-  media0: yup.string().trim().url("Need to be a valid URL").optional(),
+  address: yup.string().trim().max(100).required(),
+  city: yup.string().trim().max(100).required(),
+  country: yup.string().trim().max(50).required(),
+  media0: yup
+    .string()
+    .trim()
+    .url("Need to be a valid URL")
+    .required("You need at least one photo "),
   media1: yup.string().trim().url("Need to be a valid URL").optional(),
   media2: yup.string().trim().url("Need to be a valid URL").optional(),
 });

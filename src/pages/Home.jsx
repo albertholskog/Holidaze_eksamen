@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchVenues } from "../features/VenueSlice";
+// import { fetchVenues } from "../features/VenueSlice";
 import CarouselBody from "../components/Carousel/CarouselBody";
 import SearchBar from "../components/SearchBar";
 import Loader from "../components/Loader";

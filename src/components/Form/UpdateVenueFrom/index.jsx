@@ -11,57 +11,47 @@ import { getLocation } from "../utils/getLocation";
 import { metaData } from "../utils/metaData";
 import ErrorMessage from "../ErrorMessage";
 
-function UpdateVenueFrom({ id, setRefetch }) {
-  const [mediaFields, setMediaFields] = useState(1);
+function UpdateVenueFrom({ id, setRefetch, venueData }) {
   const [error, setError] = useState(null);
+
   const {
     handleSubmit,
     formState: { errors },
     control,
   } = useForm({
     defaultValues: {
-      name: "",
-      description: "",
-      price: null,
-      maxGuests: null,
-      address: "",
-      city: "",
-      country: "",
-      media0: "",
-      media1: "",
-      media2: "",
+      name: venueData.name,
+      description: venueData.description,
+      price: venueData.price,
+      maxGuests: venueData.maxGuests,
+      address: venueData.location.address,
+      city: venueData.location.city,
+      country: venueData.location.country,
+      wifi: venueData.meta.wifi,
+      parking: venueData.meta.parking,
+      breakfast: venueData.meta.breakfast,
+      pets: venueData.meta.pets,
+      media0: venueData.media.length > 0 ? venueData.media[0] : "",
+      media1: venueData.media.length > 1 ? venueData.media[1] : "",
+      media2: venueData.media.length > 1 ? venueData.media[2] : "",
     },
     resolver: yupResolver(schemaUpdateVenue),
   });
 
-  const handelAddField = () => {
-    if (mediaFields < 3) {
-      setMediaFields(mediaFields + 1);
-    }
-  };
-
   const onSubmitAddVenue = async (data) => {
     const filteredData = filterData(data);
     const media = extractMediaItems(data);
+
     const location = getLocation(data);
     const meta = metaData(data);
 
     const formData = {
       ...filteredData,
+      media,
+      location,
+      meta,
     };
 
-    if (media.length > 0) {
-      formData.media = media;
-    }
-
-    if (Object.keys(location).length > 0) {
-      formData.location = location;
-    }
-    if (Object.keys(meta).length > 0) {
-      formData.meta = meta;
-    }
-
-    console.log(formData);
 
     try {
       const token = localStorage.getItem("accessToken");
@@ -97,49 +87,49 @@ function UpdateVenueFrom({ id, setRefetch }) {
         control={control}
         name="name"
         label="Title"
-        notRequired
+       
       />
       <TextFields
         errors={errors}
         control={control}
         name="description"
         label="Description"
-        notRequired
+       
       />
       <TextFields
         errors={errors}
         control={control}
         name="price"
         label="Price per night"
-        notRequired
+       
       />
       <TextFields
         errors={errors}
         control={control}
         name="maxGuests"
         label="Max guests"
-        notRequired
+        
       />
       <TextFields
         errors={errors}
         control={control}
         name="address"
         label="Address"
-        notRequired
+        
       />
       <TextFields
         errors={errors}
         control={control}
         name="city"
         label="City"
-        notRequired
+      
       />
       <TextFields
         errors={errors}
         control={control}
         name="country"
         label="Country"
-        notRequired
+       
       />
       <CheckboxFields
         errors={errors}
@@ -166,21 +156,27 @@ function UpdateVenueFrom({ id, setRefetch }) {
         label="Pets"
       />
 
-      <Box>
-        {[...Array(mediaFields)].map((_, i) => (
-          <TextFields
-            key={i}
-            errors={errors}
-            control={control}
-            name={`media${i}`}
-            label={`Photo ${i + 1}`}
-            notRequired
-          />
-        ))}
-        {mediaFields < 3 ? (
-          <Button onClick={handelAddField}>Add more Photo</Button>
-        ) : null}
-      </Box>
+      <TextFields
+        errors={errors}
+        control={control}
+        name="media0"
+        label="Photo"
+        
+      />
+      <TextFields
+        errors={errors}
+        control={control}
+        name="media1"
+        label="Photo"
+        notRequired
+      />
+      <TextFields
+        errors={errors}
+        control={control}
+        name="media2"
+        label="Photo"
+        notRequired
+      />
       <Button variant="contained" type="submit">
         Update
       </Button>
