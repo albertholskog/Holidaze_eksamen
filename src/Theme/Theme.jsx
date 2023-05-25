@@ -33,13 +33,17 @@ export const lightTheme = createTheme({
     h3: {
       fontFamily: "Cantarell",
       color: color.black,
-      fontSize:20,
+      fontSize: 20,
       fontWeight: "600",
     },
     h4: {
       fontFamily: "Cantarell",
       color: color.black,
-      
+    },
+    button: {
+      fontFamily: "Cantarell",
+  
+      fontSize: 14,
     },
   },
 });

@@ -4,12 +4,16 @@ import { useDispatch } from "react-redux";
 import { saveSearchData } from "../../features/venueSearchSlice";
 import { useNavigate } from "react-router-dom";
 
-function SearchBar() {
+function SearchBar({ searchDataInput }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [guests, setGuests] = useState("");
-  const [priceRange, setPriceRange] = useState("");
-  const [destination, setDestination] = useState("");
+  const [guests, setGuests] = useState(searchDataInput?.guests || "");
+  const [priceRange, setPriceRange] = useState(
+    searchDataInput?.priceRange || ""
+  );
+  const [destination, setDestination] = useState(
+    searchDataInput?.destination || ""
+  );
 
   const guestOptions = [
     { label: "-", value: "-" },

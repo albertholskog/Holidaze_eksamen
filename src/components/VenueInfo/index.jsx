@@ -26,6 +26,7 @@ function VenuesInfo({
   bookings,
 }) {
   const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
+  
   return (
     <>
       <Grid container>
@@ -38,7 +39,7 @@ function VenuesInfo({
             <Typography variant="h4" sx={{ mb: 3 }}>
               {name}
             </Typography>
-            <Typography variant="p">City: {city}</Typography>
+            <Typography variant="p">City: {city.length > 0 ? city: "No city specified"}</Typography>
             <Typography sx={{ mt: 0.5 }}>Max guests {maxGuests} </Typography>
           </Box>
           <Box
