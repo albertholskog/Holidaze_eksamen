@@ -5,9 +5,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useState } from "react";
 
-function DataPicker({ bookings, label, onSelectDate }) {
+function DataPicker({ bookings, label, onSelectDate, dateStart }) {
   const [selectedDate, setSelectedDate] = useState(null);
-  
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
     onSelectDate(newDate);
@@ -19,11 +18,13 @@ function DataPicker({ bookings, label, onSelectDate }) {
         <DatePicker
           disablePast={true}
           disableHighlightToday={true}
-          shouldDisableDate={(day) => disableDate(day, bookings)}
+          shouldDisableDate={(day) => disableDate(day, bookings, dateStart)}
           label={label}
           value={selectedDate}
           onChange={handleDateChange}
           sx={{ width: 1 }}
+          views={["day"]}
+          showDaysOutsideCurrentMonth={true}
         />
       </DemoContainer>
     </LocalizationProvider>

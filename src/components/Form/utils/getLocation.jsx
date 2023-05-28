@@ -1,3 +1,9 @@
+/**
+ * Extracts location information from the given data object.
+ * @param {Object} data - The data object containing location information.
+ * @returns {Object} - The extracted location object.
+ */
+
 export function getLocation(data) {
   const location = {};
 

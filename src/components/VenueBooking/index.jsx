@@ -1,9 +1,10 @@
-import { checkDateRangeAvailability } from "../../utils/checkDateAvailability";
+import { checkDateRangeAvailability } from "../../utils/checkDateRangeAvailability";
 import { useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import DataPicker from "../DataPicker";
 import InputSelect from "../InputSelect";
 import { useAuth } from "../../utils/auth";
+import ErrorMessage from "../Form/ErrorMessage";
 
 function VenuesBooking({ bookings, maxGuests, id, name, price }) {
   const [fromDate, setFromDate] = useState(null);
@@ -63,7 +64,7 @@ function VenuesBooking({ bookings, maxGuests, id, name, price }) {
 
         if (response.ok) {
           setComplete(
-            `You have booked "${name}" at the price ${price} per night `
+            `You have booked "${name}" at the price $${price} per night `
           );
         } else {
           setError("Failed to book the venue, Api request failed");
@@ -94,7 +95,7 @@ function VenuesBooking({ bookings, maxGuests, id, name, price }) {
         Book venue
       </Typography>
       <Box component="form" onSubmit={handleSubmit}>
-        {error && <Typography sx={{color:"error.main", mb:2}} >{error}</Typography>}
+        {error && <ErrorMessage message={error} />}
         <InputSelect
           maxGuests={maxGuests}
           onSelectGuests={handleGuestsSelect}
@@ -108,13 +109,24 @@ function VenuesBooking({ bookings, maxGuests, id, name, price }) {
           bookings={bookings}
           label={"To"}
           onSelectDate={handleToDateSelect}
+          dateStart={fromDate}
         />
-        <Box sx={{ mt: 2.3, textAlign: "end" }}> 
-          <Button type="submit" variant="contained" >
+        <Box sx={{ mt: 2, mb: 4, textAlign: "end" }}>
+          <Button type="submit" variant="contained">
             Book venue
           </Button>
         </Box>
-        {complete && <Typography>{complete}</Typography>}
+
+        {complete && (
+          <Box>
+            <Typography variant="h3" sx={{ mb: 2 }}>
+              Your have successfully booked
+            </Typography>
+            <Typography variant="p" sx={{ mt: 2 }}>
+              {complete}
+            </Typography>
+          </Box>
+        )}
       </Box>
     </>
   );

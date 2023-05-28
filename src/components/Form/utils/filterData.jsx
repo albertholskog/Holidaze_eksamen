@@ -1,3 +1,9 @@
+/**
+ * Filters the given data object by removing specific keys and empty/null values.
+ * @param {Object} data - The data object to be filtered.
+ * @returns {Object} - The filtered data object.
+ */
+
 export function filterData(data) {
   const filteredData = {};
   for (const key in data) {

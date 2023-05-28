@@ -29,7 +29,7 @@ function CarouselItem({ item, matches }) {
                   borderRadius: "0, 0, 8px, 8px",
                 }}
               >
-                <Typography variant="h6" sx={{ ml: 1 }}>
+                <Typography variant="h6" noWrap sx={{ ml: 1 }}>
                   {slice.name}
                 </Typography>
                 <Typography sx={{ ml: 1 }}>${slice.price} per night</Typography>

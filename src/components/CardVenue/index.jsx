@@ -43,7 +43,7 @@ function CardVenue({
 
   const cardContent = () => (
     <CardContent sx={{ p: 0, display: "flex", flexDirection: "column" }}>
-      <Typography variant="h3">{name}</Typography>
+      <Typography variant="h3" noWrap>{name}</Typography>
       <Typography variant="p">Max guests: {guests}</Typography>
       {city ? (
         <Typography variant="p">City: {city}</Typography>
@@ -100,7 +100,7 @@ function CardVenue({
         <CardContent
           sx={{ display: "flex", flexDirection: "column", pl: 1, pt: 1 }}
         >
-          <Typography variant="h3" sx={{ mb: 0.3 }}>
+          <Typography variant="h3" noWrap sx={{ mb: 0.3 }}>
             {name}
           </Typography>
           <Typography variant="p" sx={{ mb: 0.2 }}>
