@@ -22,6 +22,20 @@ export const lightTheme = createTheme({
       default: color.white,
     },
   },
+  components: {
+    MuiImageListItemBar: {
+      styleOverrides: {
+        title: {
+          color: color.black,
+          fontSize: 20,
+          fontWeight: 600,
+        },
+        subtitle: {
+          color: color.black,
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: "Open Sans",
     color: color.black,
@@ -40,9 +54,12 @@ export const lightTheme = createTheme({
       fontFamily: "Cantarell",
       color: color.black,
     },
+    h6: {
+      fontFamily: "Cantarell",
+      fontWeight:600
+    },
     button: {
       fontFamily: "Cantarell",
-  
       fontSize: 14,
     },
   },

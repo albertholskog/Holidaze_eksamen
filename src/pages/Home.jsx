@@ -31,7 +31,7 @@ function Home() {
   if (error) {
     return <ErrorFetch message={"Failed to get response from database, try again"} />;
   }
-  const lowestPriceVenues = getLowestPricesVenue(data).slice(0,10);
+  const lowestPriceVenues = getLowestPricesVenue(data).slice(0,4);
  
   return (
     <>
@@ -40,10 +40,9 @@ function Home() {
         Check out the new venues
       </Typography>
       <CarouselBody data={data} />
-      {/* <Typography align="center" variant="h3" sx={{ mb: 3,mt:10 }}>
+      <Typography align="center" variant="h3" sx={{ mb: 3,mt:10 }}>
         Check out the cheapest venues
-      </Typography> */}
-      {/* <CarouselBody data={lowestPriceVenues} /> */}
+      </Typography>
       <ImagesList data={lowestPriceVenues} />
     </>
   );
