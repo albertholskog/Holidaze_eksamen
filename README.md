@@ -47,10 +47,6 @@ These applications facilitate efficient design prototyping, style guide creation
 
 ## Resources
 
-- Gantt chart
-- Design prototype:
-- Style guide: 
-- Kanban project board: 
 - Hosted application demo link: [Holidaze](https://roaring-hummingbird-c27e57.netlify.app/)
 
 ## Usage
