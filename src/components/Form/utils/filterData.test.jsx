@@ -6,7 +6,7 @@ describe("filterData", () => {
     const data = {
       media0: "image.jpg",
       media1: "video.mp4",
-      country: "USA",
+      country: "Norway",
       city: "",
       address: null,
       pets: false,
@@ -26,7 +26,7 @@ describe("filterData", () => {
     const data = {
       media0: "image.jpg",
       media1: "video.mp4",
-      country: "USA",
+      country: "Norway",
       city: "",
       address: null,
       pets: false,

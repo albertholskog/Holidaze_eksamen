@@ -4,18 +4,18 @@ import { describe, it, expect } from "vitest";
 describe("getLocation", () => {
   it("should extract location information from the data object", () => {
     const data = {
-      address: "123 Main St",
-      city: "New York",
-      country: "USA",
+      address: "Vestre Strandgate 12",
+      city: "Kristiansand",
+      country: "Norway",
       otherKey: "value",
     };
 
     const result = getLocation(data);
 
     expect(result).toEqual({
-      address: "123 Main St",
-      city: "New York",
-      country: "USA",
+      address: "Vestre Strandgate 12",
+      city: "Kristiansand",
+      country: "Norway",
     });
   });
 

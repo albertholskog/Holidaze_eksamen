@@ -6,9 +6,9 @@ describe("searchMatch", () => {
     {
       name: "Venue 1",
       location: {
-        address: "123 Main St",
-        city: "New York",
-        country: "USA",
+        address: "Øvre ring vei",
+        city: "Kristiansand",
+        country: "Norway",
       },
       maxGuests: 5,
       price: 80,
@@ -16,9 +16,9 @@ describe("searchMatch", () => {
     {
       name: "Venue 2",
       location: {
-        address: "456 Elm St",
-        city: "Los Angeles",
-        country: "USA",
+        address: "Mei street 12",
+        city: "London",
+        country: "England",
       },
       maxGuests: 10,
       price: 120,
@@ -26,9 +26,9 @@ describe("searchMatch", () => {
     {
       name: "Venue 3",
       location: {
-        address: "789 Oak St",
-        city: "London",
-        country: "UK",
+        address: "Karl Johan 12",
+        city: "Oslo",
+        country: "Norway",
       },
       maxGuests: 20,
       price: 200,
@@ -36,15 +36,15 @@ describe("searchMatch", () => {
   ];
 
   it("should filter venues based on the search criteria", () => {
-    const result = searchMatch("york", "5-10", "50-100", venues);
+    const result = searchMatch("Kristiansand", "5-10", "50-100", venues);
 
     expect(result).toEqual([
       {
         name: "Venue 1",
         location: {
-          address: "123 Main St",
-          city: "New York",
-          country: "USA",
+          address: "Øvre ring vei",
+        city: "Kristiansand",
+        country: "Norway",
         },
         maxGuests: 5,
         price: 80,
