@@ -1,59 +1,69 @@
-Holidaze Accommodation Booking Site
+# Holidaze Accommodation Booking Site
+
 This project is a front-end application for a newly launched accommodation booking site called Holidaze. The goal is to design and build a modern front-end application that interacts with the Holidaze API to provide a user-friendly interface for booking holidays at various venues. Additionally, an admin-facing side of the website allows venue managers to register and manage venues and bookings.
 
-Features
-View a list of venues
-Search for a specific venue
-View detailed information about a venue
-View available dates for a venue on a calendar
-Register as a customer with a stud.noroff.no email
-Create a booking as a registered customer
-View upcoming bookings as a registered customer
-Register as a venue manager with a stud.noroff.no email
-Create, update, and delete venues as a registered venue manager
-View bookings for venues managed by the logged-in venue manager
-User login and logout functionality
-Update user avatar
-Follows approved JavaScript and CSS frameworks
-Hosted on an approved static host
-Utilizes approved design and planning applications
-Technical Details
-JavaScript Framework
+## Features
+
+- View a list of venues
+- Search for a specific venue
+- View detailed information about a venue
+- View available dates for a venue on a calendar
+- Register as a customer with a stud.noroff.no email
+- Create a booking as a registered customer
+- View upcoming bookings as a registered customer
+- Register as a venue manager with a stud.noroff.no email
+- Create, update, and delete venues as a registered venue manager
+- View bookings for venues managed by the logged-in venue manager
+- User login and logout functionality
+- Update user avatar
+- Follows approved JavaScript and CSS frameworks
+- Hosted on an approved static host
+- Utilizes approved design and planning applications
+
+## Technical Details
+
+### JavaScript Framework
+
 The project utilizes the React JavaScript framework (version >16) to build the front-end application. React provides a component-based architecture and enables efficient rendering and state management.
 
-CSS Framework
+### CSS Framework
+
 The project follows the approved CSS frameworks, including:
 
-Bootstrap (version >5)
-Tailwind CSS (version >3)
-MUI (Material-UI) (version >5)
-Styled Components
-CSS Modules
-These frameworks offer a variety of styling options and pre-built components to ensure consistent and responsive design.
+- MUI (Material-UI) (version >5)
 
-Hosting Service
+### Hosting Service
+
 The application is hosted on an approved static host, such as GitHub Pages or Netlify. These hosting services provide reliable and scalable hosting solutions for static websites.
 
-Design and Planning Applications
+### Design and Planning Applications
+
 The design and planning aspects of the project use the approved applications:
 
-Design Applications: Adobe XD, Figma, Sketch
-Planning Applications: Trello, GitHub Projects
+- Design Applications: Adobe XD, Figma, Sketch
+- Planning Applications: Trello, GitHub Projects
+
 These applications facilitate efficient design prototyping, style guide creation, project management, and collaboration among team members.
 
-Resources
-Gantt chart for project timing: [link to Gantt chart]
-Design prototype: [link to design prototype]
-Style guide: [link to style guide]
-Kanban project board: [link to kanban project board]
-Repository link: [link to project repository]
-Hosted application demo link: [link to hosted application demo]
-Usage
+## Resources
+
+- Gantt chart for project timing: [link to Gantt chart]
+- Design prototype: [link to design prototype]
+- Style guide: [link to style guide]
+- Kanban project board: [link to kanban project board]
+- Repository link: [link to project repository]
+- Hosted application demo link: [link to hosted application demo]
+
+## Usage
+
 To run the application locally, follow these steps:
 
-Clone the repository: git clone [repository URL]
-Install dependencies: npm install
-Start the development server: npm start
-Access the application in your browser at http://localhost:3000
-Contributing
+1. Clone the repository: `git clone [repository URL]`
+2. Install dependencies: `npm install
+3. Build: `npm run build`
+4. Start the development server: `npm run dev`
+
+
+## Contributing
+
 Contributions to the Holidaze project are welcome. If you encounter any issues or have suggestions for improvements, please submit a pull request or open an issue in the project repository.
