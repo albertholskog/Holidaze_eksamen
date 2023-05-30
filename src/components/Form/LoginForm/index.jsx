@@ -63,6 +63,7 @@ function LoginForm() {
         control={control}
         name="password"
         label="Password"
+        type="password"
       />
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>
         Sign in

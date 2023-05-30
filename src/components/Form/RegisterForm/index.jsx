@@ -87,6 +87,7 @@ function RegisterForm() {
         control={control}
         name="password"
         label="Password"
+        type="password"
       />
       <TextFields
         errors={errors}
