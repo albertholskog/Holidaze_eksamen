@@ -59,7 +59,7 @@ These applications facilitate efficient design prototyping, style guide creation
 To run the application locally, follow these steps:
 
 1. Clone the repository: `git clone [repository URL]`
-2. Install dependencies: `npm install
+2. Install dependencies: `npm install`
 3. Build: `npm run build`
 4. Start the development server: `npm run dev`
 

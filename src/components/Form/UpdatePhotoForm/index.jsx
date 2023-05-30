@@ -33,7 +33,7 @@ function UpdatePhotoForm({ setRefetch }) {
           body: JSON.stringify(data),
         }
       );
-      console.log(response);
+ 
       if (response.ok) {
         setRefetch((prevRefetch) => !prevRefetch);
       } else {

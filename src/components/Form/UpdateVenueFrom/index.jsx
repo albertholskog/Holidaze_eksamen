@@ -67,7 +67,7 @@ function UpdateVenueFrom({ id, setRefetch, venueData }) {
         }
       );
 
-      console.log(response);
+      
       if (response.ok) {
         setRefetch((prevRefetch) => !prevRefetch);
       } else {
