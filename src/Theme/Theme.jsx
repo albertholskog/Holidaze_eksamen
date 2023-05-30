@@ -32,6 +32,7 @@ export const lightTheme = createTheme({
         },
         subtitle: {
           color: color.black,
+          fontSize: 16,
         },
       },
     },
@@ -56,7 +57,7 @@ export const lightTheme = createTheme({
     },
     h6: {
       fontFamily: "Cantarell",
-      fontWeight:600
+      fontWeight: 600,
     },
     button: {
       fontFamily: "Cantarell",

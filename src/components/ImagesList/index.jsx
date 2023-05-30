@@ -49,7 +49,6 @@ function ImagesList({ data }) {
             title={item.name}
             subtitle={`$${item.price} per night`}
             sx={{
-              
               borderBottomRightRadius: 7,
               borderBottomLeftRadius: 7,
               bgcolor: "rgba(245, 245, 245, 0.90)",
