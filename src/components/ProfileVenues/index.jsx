@@ -29,6 +29,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
                     country={bookings.location.country}
                     meta={bookings.meta}
                     description={bookings.description}
+                    price={bookings.price}
                   />
                 ))
               ) : (
@@ -50,6 +51,7 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
                     city={booking.venue.location.city}
                     dateFrom={booking.dateFrom}
                     dateTo={booking.dateTo}
+                    price={booking.price}
                   />
                 ))
               ) : (
@@ -74,6 +76,8 @@ function ProfileVenues({ bookings, venueManager, venues, setRefetch }) {
                     city={booking.venue.location.city}
                     dateFrom={booking.dateFrom}
                     dateTo={booking.dateTo}
+                    price={booking.price}
+
                   />
                 ))
               ) : (
